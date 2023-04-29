@@ -33,18 +33,6 @@ O `nome_do_ambiente` é o nome que você escolheu para o ambiente virtual.
 
 Depois de ativar o ambiente virtual, você verá o nome do ambiente virtual no prompt de comando.
 
-### Instalando dependências de um projeto Python
-
-Com o ambiente virtual ativado, você pode instalar as dependências de um projeto Python usando o arquivo `requirements.txt`. O arquivo `requirements.txt` é um arquivo de texto simples que lista as dependências do projeto, uma em cada linha.
-
-Para instalar as dependências, certifique-se de estar no diretório raiz do projeto e execute o seguinte comando:
-
-```
-pip install -r requirements.txt
-```
-
-
-Isso instalará todas as dependências do projeto listadas no arquivo `requirements.txt`.
 
 ### Desativando o ambiente virtual
 
@@ -126,6 +114,18 @@ pip freeze > requirements.txt
 
 Isso criará um arquivo requirements.txt que lista todos os pacotes instalados em seu ambiente Python. Você pode editar este arquivo manualmente para adicionar ou remover pacotes, se necessário.
 
+### Instalando dependências de um projeto Python
+
+Com o ambiente virtual ativado, você pode instalar as dependências de um projeto Python usando o arquivo `requirements.txt`. O arquivo `requirements.txt` é um arquivo de texto simples que lista as dependências do projeto, uma em cada linha.
+
+Para instalar as dependências, certifique-se de estar no diretório raiz do projeto e execute o seguinte comando:
+
+```
+pip install -r requirements.txt
+```
+
+
+Isso instalará todas as dependências do projeto listadas no arquivo `requirements.txt`.
 
 ## Equipe
 
