@@ -1,4 +1,4 @@
-# Plataforma xxxxxx
+# Plataforma NutriAtivo
 
 ## Como usar o venv (ambiente virtual)
 
