@@ -14,12 +14,13 @@ def set_permissions(user):
     grupo_nome = {
         "A": "Administrador",
         "C": "Cliente",
-        "P": "Profissional",
+        "EF": "Educador Fisico",
+        "N" : "Nutricionista"
     }.get(tipo, "default")
 
-    grupo, _ = Group.objects.get_or_create(name=grupo_nome)
+    nome_perm = grupo_nome.replace(" ", "_").lower()
 
-    nome_perm = grupo_nome.replace(" ", "_").upper()
+    grupo, _ = Group.objects.get_or_create(name=grupo_nome)
 
     try:
         permission, _ = Permission.objects.get_or_create(
@@ -40,6 +41,6 @@ def set_permissions(user):
     try:
         user.groups.add(grupo)
     except Exception as e:
-        raise Exception(f"Erro ao adicionar usuário {user.nome} ao grupo {grupo_nome}: {e}")
+        raise Exception(f"Erro ao adicionar usuário {user.first_name} ao grupo {grupo_nome}: {e}")
 
     return user
