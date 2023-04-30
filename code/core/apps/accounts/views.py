@@ -1,25 +1,30 @@
 from django.shortcuts import render, redirect
 from accounts.models import Usuario
+from .forms import RegistroUsuarioForm
+from .permissions import set_permissions
 
-def solicitar_cadastro(request):
-      
-    # if request.method == "POST":
-    #     form_solicitacao = UsuarioForm(request.POST)
-        
-    #     if form_solicitacao.is_valid():
-    #         usuario = form_solicitacao.save(commit=False)
-            
-    #         usuario.is_active = False
-    #         usuario.save()
-            
-    #         usuario = set_permission(usuario)
-                        
-    #         context={
-    #             'form_solicitacao': form_solicitacao
-    #         }
-            
+def cadastrar(request):
     
-    # form_solicitacao = UsuarioForm()
-        
+    form = RegistroUsuarioForm()
     
-    return render(request, 'accounts/register.html')
+    if request.method == "POST":
+        form = RegistroUsuarioForm(request.POST)
+        
+        if form.is_valid():
+            
+            usuario = form.save(commit=False)
+            print(form.cleaned_data)
+
+            if usuario.tipo != "C": 
+                usuario.is_active = False
+
+            usuario.save()
+            usuario = set_permissions(usuario)
+
+            return redirect('/accounts/login/')
+    
+    context = {
+        'form' : form 
+    }
+
+    return render(request, 'registration/registrar.html', context)
