@@ -1,9 +1,5 @@
 from django.contrib.auth.models import  User
-from django.contrib.auth.models import Group, Permission
-
 from django.db import models
-from multiselectfield import MultiSelectField
-
 from core.validators import validate_cpf
 
 
