@@ -1,0 +1,142 @@
+{% extends './../base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static '/style/registration/registrar.css' %}">
+    <title> Entre </title>
+{% endblock %}
+
+{% block content %}
+    <main class="content">
+        
+        <div class="card-wrapper">
+
+            <div class="card">
+                <header class="card__header">
+                    <div class="logo">
+                        <img src="{% static '/assets/logo.svg' %}" alt="">
+                        <span class="logoName">
+                            <span class="text-secondary">Nutri</span>Ativo
+                        </span>
+                    </div>
+                    <h2 class="subtitle">Criar sua Conta do NutriAtivo</h2>
+                </header>
+                <div class="card__body">
+                    <form class="card-form form" method="POST" >
+                        {% csrf_token %}
+                        <ul>
+                            <div class="field__group">
+            
+                                <li>
+                                    <div class="field">
+                                        {{ form.first_name }}
+                                        {{ form.first_name.label_tag }}
+                                    </div>
+                                    {{ form.first_name.errors }}
+                                </li>
+            
+                                <li>
+                                    <div class="field">
+                                        {{ form.last_name }}
+                                        {{ form.last_name.label_tag }}
+                                    </div>
+                                    {{ form.last_name.errors }}
+                                </li>
+                            </div>
+                            <li>
+                                <div class="field">
+                                    {{ form.email }}
+                                    {{ form.email.label_tag }}
+                                </div>
+                                {{ form.email.errors }}
+                            </li>
+                            <div class="field__group">
+            
+                                <li>
+                                    <div class="field">
+                                        {{ form.username }}
+                                        {{ form.username.label_tag }}
+                                    </div>
+                                    {{ form.username.errors }}
+                                </li>
+            
+                                <li>
+                                    <div class="field">
+                                        {{ form.cpf }}
+                                        {{ form.cpf.label_tag }}
+                                    </div>
+                                    {{ form.cpf.errors }}
+                                </li>
+                            </div>
+
+                            <li class="">
+                                <div class="field">
+                                    <!-- {{ form.tipo.label_tag }} -->
+                                    {{ form.tipo }}
+                                </div>
+                                {{ form.tipo.errors }}
+                            </li>
+
+                            <li id="codigoAutenticador">
+                                
+                            </li>
+
+                            <div class="field__group">
+            
+                                <li>
+                                    <div class="field">
+                                        {{ form.password1 }}
+                                        {{ form.password1.label_tag }}
+                                    </div>
+                                    {{ form.password.errors }}
+                                </li>
+            
+                                <li>
+                                    <div class="field">
+                                        {{ form.password2 }}
+                                        <label for="password_2">Confirmar</label>
+                                    </div>
+                                    {{ form.password2.errors }}
+                                </li>
+                            </div>
+                        </ul>
+                        <div class="actions">
+                            <a href="/accounts/login" class="btn text-secondary">Faça login em vez disso</a>
+                            <button class="btn submit" type="submit">
+                                Cadastrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        <script>
+            const select_tipo_input = document.getElementById("id_tipo");
+
+            const tipo_input = document.getElementById("codigoAutenticador");
+            tipo_input.style.display = "none"
+            select_tipo_input.addEventListener("change", () => {
+                if (select_tipo_input.value == "N" || select_tipo_input.value == "EF" ) {
+
+                    const codigo_autenticador = select_tipo_input.value == "N" ? "CRN" : "CREF" 
+                    tipo_input.style.display = "block"
+
+                    tipo_input.innerHTML = `
+                    <div class="field">
+                        <input type="text" id="id_codigo_autenticador" placeholder=" " name="codigo_autenticador">
+                        <label for="id_codigo_autenticador">${codigo_autenticador}</label>
+                    </div>
+                    `;
+                } else {
+                    tipo_input.innerHTML = "";
+                    tipo_input.style.display = "none"
+                }
+            });
+        </script>
+    </main>
+    
+
+{% endblock %}
+

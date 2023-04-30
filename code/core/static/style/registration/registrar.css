@@ -1,163 +1,176 @@
 .content {
-    width: 100%;
-    height: max-content;
-    min-height: 100vh; }
-    @media only screen and (min-width: 600px) {
-      .content {
-        display: flex;
-        justify-content: center;
-        padding-top: 2rem; } }
-  
-  .card-wrapper {
-    width: fit-content;
-    height: max-content;
+  width: 100%;
+  height: max-content;
+  min-height: 100vh; }
+  @media only screen and (min-width: 600px) {
+    .content {
+      display: flex;
+      justify-content: center;
+      padding-top: 2rem; } }
+
+.card-wrapper {
+  width: fit-content;
+  height: max-content;
+  display: flex;
+  width: 100%;
+  justify-content: center; }
+  @media only screen and (min-width: 600px) {
+    .card-wrapper {
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      border-radius: var(--radius-s);
+      max-width: 35rem;
+      justify-content: start;
+      background-image: url("../../assets/petting.svg");
+      background-position: center right 10%;
+      background-repeat: no-repeat;
+      background-size: 12rem; } }
+
+.card {
+  width: 100%;
+  padding: var(--pd-m4);
+  height: fit-content; }
+  @media only screen and (min-width: 460px) {
+    .card {
+      max-width: 35rem; } }
+  .card__header {
     display: flex;
-    width: 100%;
-    justify-content: center; }
-    @media only screen and (min-width: 600px) {
-      .card-wrapper {
-        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-        border-radius: var(--radius-s);
-        max-width: 40rem;
-        justify-content: start;
-        background-image: url("../../assets/petting.svg");
-        background-position: center right 10%;
-        background-repeat: no-repeat;
-        background-size: 12rem; } }
-  
-  .card {
-    width: 100%;
-    padding: var(--pd-m4);
-    height: fit-content; }
-    @media only screen and (min-width: 460px) {
-      .card {
-        max-width: 25rem; } }
-    .card__header {
-      display: flex;
-      flex-direction: column;
-      gap: var(--pd-m4);
-      margin-bottom: var(--pd-m4); }
-      .card__header .title {
-        font-size: 1.7rem;
-        font-weight: 500; }
-      .card__header .subtitle {
-        font-size: 1.4rem;
-        font-weight: 400; }
-  
-  .logo {
+    flex-direction: column;
+    gap: var(--pd-m4);
+    margin-bottom: var(--pd-m4); }
+    .card__header .title {
+      font-size: 1.7rem;
+      font-weight: 500; }
+    .card__header .subtitle {
+      font-size: 1.4rem;
+      font-weight: 400; }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--pd-s3);
+  text-transform: capitalize; }
+  .logo img {
+    height: 2rem;
+    width: auto; }
+  .logo span {
+    font-family: monospace;
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 1.5rem; }
+
+.form {
+  padding: var(--pd-s4) 0; }
+  .form ul {
     display: flex;
-    align-items: center;
-    gap: var(--pd-s3);
-    text-transform: capitalize; }
-    .logo img {
-      height: 2rem;
-      width: auto; }
-    .logo span {
-      font-family: monospace;
-      text-transform: capitalize;
-      font-weight: 600;
-      font-size: 1.5rem; }
-  
-  .form {
-    padding: var(--pd-s4) 0; }
-    .form ul {
-      display: flex;
-      flex-direction: column;
-      gap: var(--pd-m3); }
-    .form .field__group {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--pd-m1); }
-      .form .field__group li {
-        flex-grow: 1;
-        min-width: 5rem; }
-    .form .field {
-      --input-fontSize: 0.9rem;
-      --label-fontSize: 0.666rem;
-      --border-focus-size: 2px;
-      --field-height: 2rem;
-      position: relative;
-      height: var(--field-height);
-      width: 100%;
-      max-width: 25rem; }
-      .form .field label {
-        display: inline;
-        position: absolute;
-        left: var(--pd-s3);
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 500;
-        font-size: var(--input-fontSize);
-        text-transform: capitalize;
-        top: calc( var(--field-height) / 2 - ( var(--input-fontSize) / 2) );
-        color: gray;
-        transition: 0.15s ease;
-        padding: 0 var(--pd-s2);
-        z-index: -1;
-        color: var(--text-muted); }
-      .form .field input {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        outline: 1px solid rgba(153, 153, 153, 0.446);
-        font-size: var(--input-fontSize);
-        padding: 0 var(--pd-s3);
-        border-radius: var(--radius-s);
-        background: none;
-        font-size: var(--input-fontSize);
-        z-index: 1; }
-        .form .field input:focus {
-          z-index: 0;
-          outline: none;
-          outline: 2px solid var(--c-secondary); }
-          .form .field input:focus ~ label {
-            color: var(--c-secondary);
-            font-weight: 600; }
-        .form .field input:focus ~ label, .form .field input:not(:placeholder-shown):not(:focus) + label {
-          --input-top: calc( var(--label-fontSize) + var(--border-focus-size) / 2);
-          top: calc( var(--input-top) * -1 + 0.17rem);
-          background-color: #FFF;
-          font-weight: 600;
-          font-size: var(--label-fontSize);
-          z-index: 1; }
-    .form .errorlist {
-      color: darkred; }
-      .form .errorlist li::before {
-        content: "*";
-        padding-left: var(--pd-s2); }
-    .form .submit {
-      display: inline-block;
-      min-width: 4em;
-      width: 100%;
-      max-width: 8em;
-      height: 2.4em;
-      font-weight: 600;
-      font-size: 1em;
-      border-radius: 5px;
-      color: #FFF;
-      background-color: var(--c-secondary); }
-  
-  .actions {
-    margin-top: var(--pd-l1);
+    flex-direction: column;
+    gap: var(--pd-m3); }
+  .form .field__group {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline; }
-    .actions .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: fit-content;
-      font-size: 0.97rem; }
-    .actions .submit {
-      background-color: var(--c-secondary);
-      padding: var(--pd-s4) var(--pd-m1);
-      border-radius: var(--radius-s);
+    gap: var(--pd-m1); }
+    .form .field__group li {
+      flex-grow: 1;
+      min-width: 5rem; }
+  .form .field {
+    --input-fontSize: 1rem;
+    --label-fontSize: 0.8rem;
+    --border-focus-size: 2px;
+    --field-height: 2.4rem;
+    position: relative;
+    height: var(--field-height);
+    width: 100%; }
+    .form .field:has(select) label {
+      position: relative; }
+    .form .field label {
+      font-family: 'Open Sans', sans-serif;
       font-weight: 500;
-      font-size: 0.87rem;
-      cursor: pointer;
-      color: #FFF; }
-  
-  /*# sourceMappingURL=registrar.css.map */
+      font-size: var(--input-fontSize);
+      text-transform: capitalize;
+      color: gray;
+      transition: 0.15s ease;
+      padding: 0 var(--pd-s3);
+      color: var(--text-muted); }
+    .form .field select {
+      width: 100%;
+      height: 100%;
+      outline: 1px solid rgba(153, 153, 153, 0.446);
+      font-size: var(--input-fontSize);
+      padding: 0 var(--pd-s3);
+      border-radius: var(--radius-s);
+      background: none;
+      font-size: var(--input-fontSize); }
+    .form .field:has(input) label {
+      display: inline;
+      position: absolute;
+      left: var(--pd-s3);
+      top: calc( var(--field-height) / 2 - ( var(--input-fontSize) / 2) );
+      z-index: -1; }
+    .form .field input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      outline: 1px solid rgba(153, 153, 153, 0.446);
+      font-size: var(--input-fontSize);
+      padding: 0 var(--pd-s3);
+      border-radius: var(--radius-s);
+      background: none;
+      font-size: var(--input-fontSize);
+      z-index: 1; }
+      .form .field input:focus {
+        z-index: 0;
+        outline: none;
+        outline: 2px solid var(--c-secondary); }
+        .form .field input:focus ~ label {
+          color: var(--c-secondary);
+          font-weight: 600; }
+      .form .field input:focus ~ label, .form .field input:not(:placeholder-shown):not(:focus) + label {
+        --input-top: calc( var(--label-fontSize) + var(--border-focus-size) / 2);
+        top: calc( var(--input-top) * -1 + 0.17rem);
+        background-color: #FFF;
+        font-weight: 600;
+        font-size: var(--label-fontSize);
+        z-index: 1; }
+  .form .errorlist {
+    color: darkred; }
+    .form .errorlist li::before {
+      content: "*";
+      padding-left: var(--pd-s2); }
+  .form .submit {
+    display: inline-block;
+    min-width: 4em;
+    width: 100%;
+    max-width: 8em;
+    height: 2.4em;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 5px;
+    color: #FFF;
+    background-color: var(--c-secondary); }
+
+.actions {
+  margin-top: var(--pd-l1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline; }
+  .actions .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    font-size: 0.97rem; }
+  .actions .submit {
+    background-color: var(--c-secondary);
+    padding: var(--pd-s4) var(--pd-m1);
+    border-radius: var(--radius-s);
+    font-weight: 500;
+    font-size: 0.87rem;
+    cursor: pointer;
+    cursor: pointer;
+    color: #FFF; 
+  }
+
+/*# sourceMappingURL=registrar.css.map */

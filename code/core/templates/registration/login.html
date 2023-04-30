@@ -26,7 +26,7 @@
 
             <div class="card__body">
 
-                <form class="card-form form" method="POST" action=".">
+                <form class="card-form form" method="POST">
                     {% csrf_token %}
                     <ul>
                         {% for field in form %}
@@ -42,7 +42,7 @@
                     
                     <div class="actions">
     
-                        <a href="/accounts/registrar" class="btn text-secondary">Criar conta</a>
+                        <a href="/accounts/cadastrar" class="btn text-secondary">Criar conta</a>
     
                         <button class="btn submit" type="submit">
                             Entrar
