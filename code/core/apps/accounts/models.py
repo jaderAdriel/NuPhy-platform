@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import  User
 from django.contrib.auth.models import Group, Permission
 
 from django.db import models
@@ -7,42 +7,28 @@ from multiselectfield import MultiSelectField
 from core.validators import validate_cpf
 
 
-class Usuario(AbstractUser):
+class Usuario(User):
 
     ROLE_CHOICES = (
         ("A", "Administrador"),
         ("C", "Cliente"),
-        ("P", "Profissional"),
-    )
-
-    groups = models.ManyToManyField(
-        Group,
-        related_name='usuarios',
-        blank=True,
-        help_text='Os grupos aos quais este usuário pertence. '
-                  'Um usuário com acesso a um grupo terá todas as permissões '
-                  'atribuídas a esse grupo.'
-    )
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name='usuarios',
-        blank=True,
-        help_text='Especifica as permissões específicas do usuário. '
-                  'Isso é usado em conjunto com as permissões de grupo.'
+        ("N", "Nutricionista"),
+        ("EF", "EducadorFisico"),
     )
 
     codigoAutenticador = models
 
     cpf = models.CharField(
         max_length=13,
-        primary_key=True,
+        unique=True,
         validators=[validate_cpf]
     )
 
-    tipo = MultiSelectField(
+    tipo = models.CharField(
         choices=ROLE_CHOICES,
-        max_length=20,
-        max_choices=1,
+        blank=False,
+        null=False,
+        max_length=2
     )
 
     localAtendimento = models.CharField(
@@ -52,8 +38,4 @@ class Usuario(AbstractUser):
     )
 
     def __str__(self):
-        return self.nome
-    
-    def save(self, *args, **kwargs):
-        self.username = self.cpf
-        super(Usuario, self).save(*args, **kwargs)
+        return self.last_name
