@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="shortcut icon" href="{% static '/assets/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/style/style.css' %}">
+    <link rel="stylesheet" href="{% static '/style/registration/listarUsuarios.css' %}">
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <ul id="users-list">
+            {% for user in usuarios %}
+                <li 
+                    data-id={{user.id}} 
+                    data-firstname={{user.first_name}} 
+                    data-tipo={{user.tipo}} 
+                    data-codigo={{user.codigoAutenticador}}
+                    data-cpf={{user.cpf}}
+                    data-email={{user.email}}
+                >
+                    {{user.first_name}} - {{user.codigoAutenticador}}
+                </li>
+                
+            {% endfor %}
+        </ul>
+        <div id="modal" class="modal">
+            <div class="content">
+                <button id="modal-close-btn">&times;</button>
+                <!-- Conteúdo do modal será gerado dinamicamente -->
+            </div>
+        </div>
+        <a href="/accounts/aceitarConta"></a>
+    </div>
+
+    <script>
+        const usersList = document.getElementById("users-list");
+        const modal = document.getElementById("modal");
+        const modalContent = modal.querySelector(".content");
+        const modalCloseBtn = modalContent.querySelector("#modal-close-btn");
+
+        // Função para ocultar o modal
+        function hideModal() {
+            modal.style.display = "none";
+        }
+
+        // Evento de clique no botão de fechar
+        modalCloseBtn.addEventListener("click", hideModal);
+
+        // Evento de clique fora do modal para ocultá-lo (opcional)
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                hideModal();
+            }
+        });
+        function showUserInfoModal(user) {
+
+            const { id, firstname, tipo, codigo, cpf, email} = user
+
+            modalContent.innerHTML = `
+                <div class="card">
+                    <div class="header">
+                        <h2>${firstname}</h2>
+                    </div>
+                    <div class="body">
+                        <div class="user-attrs-list">
+                            <li class="field">
+                                <p class="name">E-mail</p>
+                                <p class="value">${email}</p>
+                            </li>
+                            <li class="field">
+                                <p class="name">CPF</p>
+                                <p class="value">${cpf}</p>
+                            </li>
+                            <li class="field">
+                                <p class="name">Papel</p>
+                                <p class="value">${tipo == "EF" ? "Educador Físico" : tipo == "N" ? "Nutricionista": "Administrador" }</p>
+                            </li>
+
+                            ${codigo == "None"? "" : `
+                            <li class="field">
+                                <p class="name">Código</p>
+                                <p class="value">${tipo == "N" ? "CRN" : "CREF"} - ${codigo}</p>
+                            </li>
+                            `
+                            }
+                        </div>
+                    </div>
+
+                    <div class="footer">
+                        <a href="/accounts/aceitar/${id}">Aceitar</a>
+                        <a href="/accounts/negar/${id}">Negar</a>
+                    </div>
+
+                </div>
+                `
+            modal.style.display = "block";
+        }
+
+        // Evento de clique na lista de usuários
+        usersList.addEventListener("click", function(event) {
+            const li = event.target.closest("li");
+            if (li) {
+                const id = li.getAttribute("data-id");
+                const firstname = li.getAttribute("data-firstname");
+                const tipo = li.getAttribute("data-tipo");
+                const codigo = li.getAttribute("data-codigo");
+                const cpf = li.getAttribute("data-cpf");
+                const email = li.getAttribute("data-email");
+                showUserInfoModal({id, firstname, tipo, codigo, cpf, email});
+            }
+        });
+    </script>
+</body>
+</html>

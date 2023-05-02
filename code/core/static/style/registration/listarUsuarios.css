@@ -1,0 +1,42 @@
+@charset "UTF-8";
+@use './../variables';
+/* Estilos para o modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
+  .modal .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: #fff; }
+  .modal .card {
+    padding: 1rem; }
+    .modal .card .header {
+      padding: var(--pd-s4);
+      border-bottom: 1px solid #c9c9c9; }
+    .modal .card .user-attrs-list .field {
+      padding: var(--pd-s4);
+      display: flex;
+      justify-content: space-between; }
+
+/* Estilos para a lista de usuários */
+#users-list {
+  list-style: none;
+  padding: 0; }
+  #users-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    cursor: pointer; }
+    #users-list li:hover {
+      background-color: #e6e6e6; }
+
+/*# sourceMappingURL=listarUsuarios.css.map */

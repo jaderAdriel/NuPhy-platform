@@ -86,23 +86,25 @@
                                 {{ form.codigoAutenticador.errors }}
                             </li>
 
-                            <div class="field__group">
-            
-                                <li>
-                                    <div class="field">
-                                        {{ form.password1 }}
-                                        {{ form.password1.label_tag }}
-                                    </div>
-                                    {{ form.password.errors }}
-                                </li>
-            
-                                <li>
-                                    <div class="field">
-                                        {{ form.password2 }}
-                                        <label for="password_2">Confirmar</label>
-                                    </div>
-                                    {{ form.password2.errors }}
-                                </li>
+                            <div>
+                                <div class="field__group">
+                
+                                    <li>
+                                        <div class="field">
+                                            {{ form.password1 }}
+                                            {{ form.password1.label_tag }}
+                                        </div>
+                                    </li>
+                                    
+                                    <li>
+                                        <div class="field">
+                                            {{ form.password2 }}
+                                            <label for="password_2">Confirmar</label>
+                                        </div>
+                                    </li>
+                                </div>
+                                {{ form.password.errors }}
+                                {{ form.password2.errors }}
                             </div>
                         </ul>
                         <div class="actions">
