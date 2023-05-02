@@ -79,7 +79,11 @@
                             </li>
 
                             <li id="codigoAutenticador">
-                                
+                                <div class="field">
+                                    {{ form.codigoAutenticador }}
+                                    {{ form.codigoAutenticador.label_tag }}
+                                </div>
+                                {{ form.codigoAutenticador.errors }}
                             </li>
 
                             <div class="field__group">
@@ -114,26 +118,27 @@
         </div>
         <script>
             const select_tipo_input = document.getElementById("id_tipo");
+            const codigoAutenticador_input = document.getElementById("codigoAutenticador")
+            const codigoAutenticador_label  = codigoAutenticador_input.querySelector("label")
 
-            const tipo_input = document.getElementById("codigoAutenticador");
-            tipo_input.style.display = "none"
-            select_tipo_input.addEventListener("change", () => {
-                if (select_tipo_input.value == "N" || select_tipo_input.value == "EF" ) {
-
-                    const codigo_autenticador = select_tipo_input.value == "N" ? "CRN" : "CREF" 
-                    tipo_input.style.display = "block"
-
-                    tipo_input.innerHTML = `
-                    <div class="field">
-                        <input type="text" id="id_codigo_autenticador" placeholder=" " name="codigo_autenticador">
-                        <label for="id_codigo_autenticador">${codigo_autenticador}</label>
-                    </div>
-                    `;
+            const check = (value) => {
+                const codigoAutenticador = select_tipo_input.value == "N" ? "CRN" : "CREF" 
+                
+                if (!(value == "N" || value == "EF" )) {
+                    codigoAutenticador_input.style.display = "none";
                 } else {
-                    tipo_input.innerHTML = "";
-                    tipo_input.style.display = "none"
+                    codigoAutenticador_input.style.display = "block";
+                    codigoAutenticador_label.innerText = codigoAutenticador;
                 }
-            });
+            }
+
+            select_tipo_input.addEventListener("change", () => { 
+                console.log('oi');
+                check(select_tipo_input.value)
+            })
+
+            check(select_tipo_input.value);
+
         </script>
     </main>
     

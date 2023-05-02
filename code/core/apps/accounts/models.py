@@ -12,7 +12,12 @@ class Usuario(User):
         ("EF", "EducadorFisico"),
     )
 
-    codigoAutenticador = models
+    codigoAutenticador = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        unique=True
+    )
 
     cpf = models.CharField(
         max_length=13,
