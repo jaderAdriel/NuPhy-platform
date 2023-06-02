@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%block head%} {% endblock %}
+    <link rel="shortcut icon" href="{% static '/assets/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static '/style/style.css' %}">
+</head>
+<body>
+
+    <div class="wrapper">
+        {% include './navbar.html' %}
+
+        {%block content%}
+
+
+        {% endblock %}
+    
+    </div>
+    <script>
+        document.querySelectorAll('.field input').forEach(e => {
+            e.setAttribute('placeholder', ' ');
+        });
+
+        document.querySelectorAll('.field label').forEach(e => {
+            if ( e.innerText.search(':') === String(e.innerText).length - 1) {
+                e.innerText = String(e.innerText).slice(0, String(e.innerText).length - 1);
+            }
+        })
+    </script>
+</body>
+</html>

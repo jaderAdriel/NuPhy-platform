@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Agenda</th>
+                <th>cliente</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if consulta %}
+            {% for c in consulta %}
+            <tr>
+                <td>{{ c.horario }}</a></td>
+                <td>{{ c.paciente }}</a></td>
+                <td>
+                    <a href="/consulta/deletarConsulta/{{c.id}}"><button class="btn btn-danger">Desmarcar</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table> 
+</div>
+{% endblock %}

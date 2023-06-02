@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>dia</th>
+                <th>agenda</th>
+                <th>profissional</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if horario %}
+            {% for h in horario %}
+            <tr>
+                <td>{{ h.dia }}</a></td>
+                <td>{{ h.agenda }}</a></td>
+                <td>{{ h.profissional }}</a></td>
+                <td>
+                    <a href="/horario/editarHorario/{{h.id}}"><button class="btn btn-warning">Editar</button></a>
+                    <a href="/horario/deletarHorario/{{h.id}}"><button class="btn btn-danger">Excluir</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody> 
+    </table> 
+</div>
+{% endblock %}

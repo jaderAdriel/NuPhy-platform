@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% load static %}
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde Web </title>
+    <link rel="shortcut icon" href="{% static 'image/logo.png'%}" >
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="/" class="logo"> <i class="fas fa-heartbeat"></i> NutriAtivo </a>
+
+    <nav class="navbar">
+        {% if user.is_authenticated %}
+            {% if 'Educador Fisico' in user.groups.all %}
+                <a href="{% url 'listarTreinos' %}">Treinos</a>
+                <a href="{% url 'profile' %}">Minha Conta</a>
+                <a href="{% url 'logout' %}">Sair</a>          
+            {% elif 'Educador Fisico' in user.groups.all %}
+                <a href="{% url 'listarTreinos' %}">Treinos</a>
+                <a href="{% url 'profile' %}">Minha Conta</a>
+                <a href="{% url 'logout' %}">Sair</a>               
+            {% elif user.is_staff or user.is_superuser %}
+                <a href="{% url 'profile' %}">Painel</a>
+                <a href="{% url 'logout' %}">Sair</a>
+            {% else %}
+                <a href="{% url 'criarConsulta' %}">Agendas</a>
+                <a href="{% url 'profile' %}">Minha Conta</a>
+                <a href="{% url 'logout' %}">Sair</a>
+        {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}">Entrar</a>
+            <a href="{% url 'cadastrar' %}">Cadastrar</a>
+        {% endif %}    
+    </nav>
+
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    <div class="image">
+        <img src="{% static 'image/home-img.svg'%}" alt="">
+    </div>
+
+    <div class="content">
+        <h3>Fique Seguro, Fique Saudável</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem sed autem vero? Magnam, est laboriosam!</p>
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h1 class="heading"> <span>Sobre</span> Nós </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="{% static 'image/about-img.svg'%}" alt="">
+        </div>
+
+        <div class="content">
+            <h3>Nós Cuidamos Da Sua Vida Saudável</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil temporibus deserunt vel?</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>Links Rápidos</h3>
+            <a href="/"> <i class="fas fa-chevron-right"></i> home </a>
+            <a href="/medicos/admim/lista/especialidades/"> <i class="fas fa-chevron-right"></i> services </a>
+        </div>
+
+        <div class="box">
+            <h3>Nosso Grupo</h3>
+            <a> <i class="fas fa-chevron-right"></i> Anna Julya Santos Cruz </a>
+            <a> <i class="fas fa-chevron-right"></i> Jader Adriel Miranda Souza </a>
+            <a> <i class="fas fa-chevron-right"></i> Kléberson Fialho Baleeiro </a>
+            <a> <i class="fas fa-chevron-right"></i> Reinaldo Soares Assunção Júnior </a>
+        </div>
+
+
+        <div class="box">
+            <h3>Siga-Nos</h3>
+            <a href=""target="_blank"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href=""target="_blank"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href=""target="_blank"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href=""target="_blank"> <i class="fab fa-instagram"></i> instagram </a>
+        </div>
+
+    </div>
+
+    <div class="credit"> created by <span>mr. web designer</span> | all rights reserved </div>
+
+</section>
+
+<!-- footer section ends -->
+
+<!-- custom js file link  -->
+<script src="{% static 'js/base.js'%}"></script>
+
+</body>
+</html>

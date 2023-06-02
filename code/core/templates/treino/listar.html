@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>diaSemana</th>
+                <th>quantidade</th>
+                <th>alimento</th>
+                <th>horario</th>
+                <th>paciente</th>
+                <th>profissional</th>
+
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if dieta %}
+            {% for d in dieta %}
+            <tr <a href="/dieta/detalharDieta/{{d.id}}"><button class="btn btn-warning"></button></a>>
+                <td>{{ d.diaSemana }}</a></td>
+                <td>{{ d.quantidade }}</a></td>
+                <td>{{ d.alimento }}</a></td>
+                <td>{{ d.horario }}</a></td>
+                <td>{{ d.paciente }}</a></td>
+                <td>{{ d.profissional }}</a></td>
+                <td>
+                    <a href="/dieta/editarDieta/{{d.id}}"><button class="btn btn-warning">Editar</button></a>
+                    <a href="/dieta/deletarDieta/{{d.id}}"><button class="btn btn-danger">Excluir</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody> 
+    </table> 
+</div>
+{% endblock %}

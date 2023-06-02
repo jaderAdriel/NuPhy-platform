@@ -1,0 +1,27 @@
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>diaSemana</th>
+                <th>quantidade</th>
+                <th>alimento</th>
+                <th>horario</th>
+                <th>paciente</th>
+                <th>profissional</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if dieta %}
+            {% for d in dieta %}
+            <tr>
+                <td>{{ d.diaSemana }}</a></td>
+                <td>{{ d.quantidade }}</a></td>
+                <td>{{ d.alimento }}</a></td>
+                <td>{{ d.horario }}</a></td>
+                <td>{{ d.paciente }}</a></td>
+                <td>{{ d.profissional }}</a></td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody> 
+    </div>

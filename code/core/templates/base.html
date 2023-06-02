@@ -1,35 +1,68 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
+    {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {%block head%} {% endblock %}
-    <link rel="shortcut icon" href="{% static '/assets/favicon.png' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static '/style/style.css' %}">
+    <title>Saúde Web </title>
+    <link rel="shortcut icon" href="{% static 'image/logo.png'%}" >
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+
 </head>
 <body>
-
-    <div class="wrapper">
-        {% include './navbar.html' %}
-
-        {%block content%}
-
-
-        {% endblock %}
     
-    </div>
-    <script>
-        document.querySelectorAll('.field input').forEach(e => {
-            e.setAttribute('placeholder', ' ');
-        });
+<!-- header section starts  -->
 
-        document.querySelectorAll('.field label').forEach(e => {
-            if ( e.innerText.search(':') === String(e.innerText).length - 1) {
-                e.innerText = String(e.innerText).slice(0, String(e.innerText).length - 1);
-            }
-        })
-    </script>
+<header class="header">
+
+    <a href="/" class="logo"> <i class="fas fa-heartbeat"></i> Saúde Web </a>
+
+    <nav class="navbar">
+        {% if user.is_authenticated %}
+            {% if 'Educador Fisico' in user.groups.all %}
+                <a href="{% url '' %}">Agendas</a>
+            {% elif 'Educador Fisico' in user.groups.all %}
+
+            {% elif user.is_staff or user.is_superuser %}
+
+                <a href="{% url 'logout' %}">Sair</a>
+            {% else %}
+                <a href="{% url 'criarConsulta' %}">Agendas</a>
+                <a href="{% url 'profile' %}">Minha Conta</a>
+                <a href="{% url 'logout' %}">Sair</a>
+        {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}">Entrar</a>
+            <a href="{% url 'cadastrar' %}">Cadastrar</a>
+        {% endif %}  
+        </nav>
+
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+    {% block content %}
+
+    {% endblock %}
+
+</section>
+
+<!-- home section ends -->
+
+<!-- custom js file link  -->
+<script src="{% static 'js/base.js'%}"></script>
+
 </body>
 </html>
