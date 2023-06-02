@@ -9,13 +9,13 @@ class Dieta( models.Model ):
         blank=True,
         null=True,
         choices=[
-            ('Segunda-feira','SF'),
-            ('Terça-feira','TF'),
-            ('Quarta-feira','QAF'),
-            ('Quinta-feira','QIF'),
-            ('Sexta-feira','SF'),
-            ('Sábado','S'),
-            ('Domingo','D'),
+            ('SF','Segunda-feira'),
+            ('TF','Terça-feira'),
+            ('QAF','Quarta-feira'),
+            ('QIF','Quinta-feira'),
+            ('SF','Sexta-feira'),
+            ('S','Sábado'),
+            ('D','Domingo'),
         ]
     )
 

@@ -40,3 +40,11 @@ class Usuario(User):
 
     def __str__(self):
         return self.last_name
+    
+
+
+# cliente
+# educador
+# nutri
+# admin
+# @Jubileu957
