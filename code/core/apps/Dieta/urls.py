@@ -3,8 +3,9 @@ from . import views
 
 urlpatterns = [
     path('criarDieta', views.criarDieta, name='criarDieta'),
-    path('editarDieta', views.editarDieta, name='editarDieta'),
-    path('deletarDieta', views.deletarDieta, name='deletarDieta'),
-    path('detalharDieta', views.detalharDieta, name='detalharDieta'),
+    path('listarDietas', views.listarDietas, name='listarDietas'),
+    path('editarDieta/<int:dieta_id>', views.editarDieta, name='editarDieta'),
+    path('deletarDieta/<int:dieta_id>', views.deletarDieta, name='deletarDieta'),
+    path('detalharDieta/<int:dieta_id>', views.detalharDieta, name='detalharDieta'),
     path('listarDietaPorUsuario', views.listarDietaPorUsuario, name='listarDietaPorUsuario'),
 ]
