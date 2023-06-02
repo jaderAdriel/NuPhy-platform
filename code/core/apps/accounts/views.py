@@ -28,3 +28,6 @@ def cadastrar(request):
     }
 
     return render(request, 'registration/registrar.html', context)
+
+def profile(request):
+    return render(request, 'registration/profile.html')
