@@ -1,5 +1,13 @@
 asgiref==3.6.0
 Django==4.2
-sqlparse==0.4.4
+django-bootstrap-form==3.4
+django-discover-runner==1.0
+django-extensions==3.2.1
 django-multiselectfield==0.1.12
 django-role-permissions==3.1.1
+pydot==1.4.2
+pygraphviz==1.10
+pyparsing==3.0.9
+python-dotenv==1.0.0
+six==1.16.0
+sqlparse==0.4.4
