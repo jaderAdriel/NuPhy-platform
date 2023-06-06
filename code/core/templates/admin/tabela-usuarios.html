@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header pb-0 px-3">
+      <h6 class="mb-0">Usuarios pendentes</h6>
+    </div>
+    <div class="card-body pt-4 p-3">
+      <ul class="list-group">
+        {% for usuario in usuarios %}
+        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+          <div class="d-flex flex-column">
+            <h6 class="mb-3 text-sm">{{ usuario.first_name }} {{  usuario.last_name }} - {{  usuario.username }}</h6>
+            <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">{{ usuario.email }}</span></span>
+            <span class="mb-2 text-xs">CPF: <span class="text-dark ms-sm-2 font-weight-bold">{{ usuario.cpf }}</span></span>
+            
+            {% if usuario.tipo == 'A' %}
+              <span class="mb-2 text-xs">Tipo: <span class="text-dark ms-sm-2 font-weight-bold">Administrador</span></span>
+            {% elif usuario.tipo == 'C' %}
+              <span class="mb-2 text-xs">Tipo: <span class="text-dark ms-sm-2 font-weight-bold">Cliente</span></span>
+            {% elif usuario.tipo == 'N' %}
+              <span class="mb-2 text-xs">Tipo: <span class="text-dark ms-sm-2 font-weight-bold">Nutricionista</span></span>
+            {% elif usuario.tipo == 'EF' %}
+              <span class="mb-2 text-xs">Tipo: <span class="text-dark ms-sm-2 font-weight-bold">Educador Físico</span></span>
+            {% else %}
+              <span class="mb-2 text-xs">Tipo: <span class="text-dark ms-sm-2 font-weight-bold">{{ usuario.tipo }}</span></span>
+            {% endif %}
+
+            {% if usuario.codigoAutenticador is not None %}
+              <span class="mb-2 text-xs">Código autenticador: <span class="text-dark ms-sm-2 font-weight-bold">{{ usuario.codigoAutenticador }}</span></span>
+            {% endif %}
+            <!-- Adicione mais campos e informações do usuário aqui, se necessário -->
+          </div>
+          <div class="ms-auto text-end">
+            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{% url 'deletarUsuario' usuario.id %}"><i class="far fa-trash-alt me-2" aria-hidden="true"></i>Delete</a>
+            <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'autorizarUsuario' usuario.id %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Aprovar</a>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  
