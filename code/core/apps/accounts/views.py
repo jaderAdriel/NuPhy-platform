@@ -1,7 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from accounts.models import Usuario
 from .forms import RegistroUsuarioForm
 from .permissions import set_permissions
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import redirect
+from django.contrib import messages
 
 def cadastrar(request):
     
@@ -29,5 +33,45 @@ def cadastrar(request):
 
     return render(request, 'registration/registrar.html', context)
 
+
+@login_required
 def profile(request):
     return render(request, 'registration/profile.html')
+
+
+@login_required
+@user_passes_test(lambda user: user.is_staff)
+def listarUsuariosPendentes(request):
+
+    context = {
+        'usuarios': Usuario.objects.filter(is_active=False)
+    }
+
+    return render(request, 'admin/base.html', context=context)
+
+
+@login_required
+@user_passes_test(lambda user: user.is_staff)
+def deletarUsuario(request, id):
+    # Lógica para deletar o usuário
+    Usuario.objects.get(pk=id).delete()
+
+    # Armazena uma mensagem de redirecionamento
+    messages.success(request, 'Usuário deletado com sucesso.')
+
+    # Redireciona para a página anterior
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+
+@login_required
+@user_passes_test(lambda user: user.is_staff)
+def autorizarUsuario(request, id):
+    # Autorização do usuario
+    Usuario.objects.get(pk=id).is_active = True
+
+    # Armazena uma mensagem de redirecionamento
+    messages.success(request, 'Usuário autorizado com sucesso.')
+
+    # Redireciona para a página anterior
+    return redirect(request.META.get('HTTP_REFERER'))
