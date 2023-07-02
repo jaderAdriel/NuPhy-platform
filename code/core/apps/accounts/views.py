@@ -47,7 +47,7 @@ def listarUsuariosPendentes(request):
         'usuarios': Usuario.objects.filter(is_active=False)
     }
 
-    return render(request, 'admin/base.html', context=context)
+    return render(request, 'admin/autorizar-usuarios.html', context=context)
 
 
 @login_required
@@ -68,7 +68,10 @@ def deletarUsuario(request, id):
 @user_passes_test(lambda user: user.is_staff)
 def autorizarUsuario(request, id):
     # Autorização do usuario
-    Usuario.objects.get(pk=id).is_active = True
+    usuario = Usuario.objects.get(pk=id)
+    usuario.is_active = True
+    usuario.save()
+
 
     # Armazena uma mensagem de redirecionamento
     messages.success(request, 'Usuário autorizado com sucesso.')
