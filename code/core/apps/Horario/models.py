@@ -15,6 +15,17 @@ class Horario( models.Model ):
         ("5", "11:00 ás 12:00"),
     )
 
+    status_choices = (
+        ("Vago", "Aberto para atendimento"),
+        ("Preenchido", "Horario preenchido"),
+    )
+
+    status = models.CharField(
+        max_length=20,
+        default="Vago",
+        choices=status_choices    
+    )
+
     agenda = models.CharField(max_length=14, choices=AGENDA)
 
     profissional = models.ForeignKey(
