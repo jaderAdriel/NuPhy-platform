@@ -1,0 +1,58 @@
+<li class="nav-item dropdown">
+
+  <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-bell"></i>
+    {% if notificacoes_nao_lidas > 0 %}
+      <span class="badge bg-primary badge-number">{{ notificacoes_nao_lidas }}</span>
+    {% endif %}
+  </a><!-- End Notification Icon -->
+
+  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications " style="">
+    
+    <li class="dropdown-header">
+      voce tem {{ notificacoes_nao_lidas }} notificacoes novas
+      <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+    </li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+
+
+    {% for notificacao in notificacoes %}
+
+    <li class="notification-item {% if notificacao.match.respondido == False %} new-notification {% endif %}">
+      {% if notificacao.contexto == "confirmacao_match" %}
+        <i class="bi bi-check-circle text-success"></i>
+      {% else  %}
+        <i class="bi bi-info-circle text-primary"></i>
+      {% endif %}
+
+      <div>
+        {% if notificacao.contexto == "confirmacao_match" %}
+            <h4>Aprovação de match</h4>
+            <p>{{ notificacao.match.animal_origem.nome }} aprovou o match. Entre em contato</p>
+            <p>{{ notificacao.criacao }}</p>
+        {% else %}
+            <h4>Solicitação de match</h4>
+            <p>{{ notificacao.match.animal_origem.nome }} solicitou um match. Veja o perfil</p>
+            <p>{{ notificacao.criacao }}</p>
+        {% endif %}
+
+        
+        
+      </div>
+    </li>
+
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    {% endfor %}
+
+
+    <li class="dropdown-footer">
+      <a href="#">Show all notifications</a>
+    </li>
+
+  </ul><!-- End Notification Dropdown Items -->
+
+</li>

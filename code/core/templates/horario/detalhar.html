@@ -1,0 +1,35 @@
+<!-- Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sobre o Hórario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+            <p id="eventTitle"></p>
+            <p id="eventStart"></p>
+        </div>
+        <div class="modal-footer">
+            <form action="" method="post" id="deleteEventBtn">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Excluir</button>
+              <button type="button" class="btn btn-secondary close-btn" data-bs-dismiss="modal">Fechar</button>
+            </form>
+
+                <script>
+                    const modal = document.getElementById('eventModal');
+                    const close_btn = document.querySelector(".close-btn");
+
+                    close_btn.addEventListener("click", () => {
+                            modal.style.display = 'none';
+        
+                            modal.classList.remove('show');
+                            modal.classList.add('hide');
+                        })
+                </script>
+        </div>
+        
+      </div>
+    </div>
+  </div>

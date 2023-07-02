@@ -1,0 +1,51 @@
+{% extends './../dashboard-base.html' %}
+
+{% block content %}
+
+  {% include './sidenav.html' %}  
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+    {% include './../navbar-base.html' %}
+  
+    <div class="container-fluid py-4">
+      <div class="row">
+
+        <div class="card">
+          <div class="card-header pb-0 p-3">
+            <div class="row">
+              <div class="col-6 d-flex align-items-center">
+                <h2 class="mb-0">Meus Horarios</h2>
+              </div>
+              <div class="col-6 text-end">
+                <button type="button" class="btn bg-gradient-dark mb-0" data-bs-toggle="modal" data-bs-target="#myModal">
+                  <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Adicionar Horario
+                </button>
+              </div>
+            </div>
+          </div>  
+          {% include './criar.html' %}
+          <div class="card-body p-3">
+            
+            <div class="col-md-7 mt-4">
+              {% include './agenda.html' %}
+            </div>
+            
+            <div class="card-header pb-0 px-3">
+
+              
+              <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <i class="far fa-calendar-alt me-2" aria-hidden="true"></i>
+                <small>23 - 30 March 2020</small>
+              </div>
+            </div>
+
+          </div>
+          
+        </div>        
+      </div>
+    </div>
+  </main>
+  
+
+{% endblock %}
+<!DOCTYPE html>

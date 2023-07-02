@@ -1,0 +1,59 @@
+<div class="container">
+    {% include './detalhar.html' %} 
+    <div id="calendar"></div>
+   
+</div>
+
+<div>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'></script>
+    <script>
+        
+        const list = [
+        {% for evento in horarios %}
+          {
+            title: '{{ evento.status }}',
+            start: '{{ evento.dia|date:"Y-m-d" }}',
+            end: '{{ evento.dia|date:"Y-m-d" }}',
+            id_horario: '{{ evento.id }}',
+            status: '{{ evento.status }}',
+
+          },
+          {% endfor %}
+        ]
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          events: list,
+          eventClick: function(info) {
+                    // Obtém os dados do evento
+                    const event = info.event;
+
+                    if (event ) {
+                      
+                      // Preenche as informações do evento no modal
+                      document.getElementById('eventTitle').textContent = 'Status: ' + event.extendedProps.status;
+                      document.getElementById('eventStart').textContent = 'Horario: ' + Date(event.title).normalize();
+                      
+                      // Abre o modal
+                      const modal = document.getElementById('eventModal');
+                      document.getElementById('deleteEventBtn').setAttribute('action', 'deletarHorario/' + String(event.extendedProps.id_horario + "/"));
+                      // document.getElementById('editEventBtn').setAttribute('href', '/horario/editarHorario/' + String(event.extendedProps.id_horario + "/"));
+
+                      modal.style.display = 'block';
+
+                      // Adicione aqui a lógica para preencher o modal com os dados do evento clicado
+
+                      modal.classList.add('show');
+                      modal.classList.remove('hide');
+                    }
+                }
+        });
+        calendar.render();
+      });
+
+    </script>
+
+

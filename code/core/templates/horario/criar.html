@@ -1,0 +1,34 @@
+{% load bootstrap %}
+{% load static %}
+{% block content %}
+
+<!-- Botão para abrir o modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Novo Atendimento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="{% url 'criarHorario' %}">
+            {% csrf_token %}
+        
+            {{ form|bootstrap }}
+        
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-primary" value="Salvar">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+
+{% endblock %}
