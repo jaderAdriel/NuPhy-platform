@@ -19,7 +19,6 @@ def gerenciarHorario(request):
     context = {
         'horarios': horarios,
         'form': horarioForm(),
-        'user': Usuario.objects.get(pk=request.user.id).username
     }
 
     return render(request, "horario/index.html", context)

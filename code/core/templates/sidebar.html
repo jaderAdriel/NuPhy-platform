@@ -1,0 +1,57 @@
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+      {% if user.is_authenticated %}
+              {% if user.groups.exists %}
+                {% for group in user.groups.all %}
+                    {% if group.name == 'Administrador' %}
+                      <li class="nav-item">
+                        <a class="nav-link collapsed" href="/animal/listar/">
+                          <i class="fas fa-calendar-check"></i>
+                          <span>asdsad</span>
+                        </a>
+                      </li>
+                    {% elif group.name == 'Cliente'%}
+                      <li class="nav-item">
+                        <a class="nav-link collapsed" href="/animal/pesquisar/">
+                          <i class="fas fa-search"></i>
+                          <span>Procurar</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link collapsed" href="/animal/listar/">
+                          <i class="fas fa-clipboard"></i>
+                          <span>Consultas</span>
+                        </a>
+                      </li>
+                    {% elif group.name == 'Nutricionista' %}
+                      <li class="nav-item">
+                        <a class="nav-link collapsed" href="{% url 'home' %}">
+                          <i class="fas fa-utensils"></i>
+                          <span>Dieta</span>
+                        </a>
+                      </li>
+                      {% elif group.name == 'Educador Fisico'  %}
+                      <li class="nav-item">
+                        <a class="nav-link collapsed" href="/match/gerenciar/">
+                          <i class="fas fa-dumbbell"></i>
+                          <span>Treino</span>
+                        </a>
+                      </li>
+                    {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% else %}
+
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="/match/gerenciar/">
+                <i class="fas fa-dumbbell"></i>
+                <span>{{user.username}}</span>
+              </a>
+            </li>
+            {% endif %}  
+    </ul>
+
+  </aside><!-- End Sidebar-->
