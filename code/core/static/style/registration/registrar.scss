@@ -21,7 +21,7 @@
     @media only screen and (min-width: 600px) {
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
         border-radius: var(--radius-s);
-        max-width: 35rem;
+        max-width: 40rem;
         justify-content: start;
 
         background-image: url('../../assets/petting.svg');
@@ -36,7 +36,7 @@
 	padding: var(--pd-m4);
     height: fit-content;
     @media only screen and (min-width: 460px) {
-        max-width: 35rem;
+        max-width: 25rem;
     }
 
 	&__header {
@@ -91,54 +91,32 @@
             min-width: 5rem;
         }
     }
-
-    
-
     .field {
-        --input-fontSize: 1rem;
-        --label-fontSize: 0.8rem;
+        --input-fontSize: 0.9rem;
+        --label-fontSize: 0.666rem;
         --border-focus-size: 2px;
-        --field-height: 2.4rem;
+        --field-height: 2rem;
 
         position: relative;
         height: var(--field-height);
         width: 100%;
-
-        &:has(select) label {
-            position: relative;
-        }
-
+        max-width: 25rem;
         label {
+            display: inline;
+            position: absolute;
+            left: var(--pd-s3);
             font-family: 'Open Sans', sans-serif;
             font-weight: 500;
             font-size: var(--input-fontSize);
             text-transform: capitalize;
+            top: calc( var(--field-height) / 2 - ( var(--input-fontSize) / 2) );
             color: gray;
             transition: 0.15s ease;
-			padding: 0 var(--pd-s3) ;
+			padding: 0 var(--pd-s2) ;
+            z-index: -1;
 			color: var(--text-muted);
         }
-
-        select { 
-            width: 100%;
-            height: 100%;
-            outline: 1px solid rgba(153, 153, 153, 0.446);
-            font-size: var(--input-fontSize);
-            padding: 0 var(--pd-s3);
-            border-radius: var(--radius-s);
-            background: none;
-            font-size: var(--input-fontSize);
-        }
-
-        &:has(input) label {
-            display: inline;
-            position: absolute;
-            left: var(--pd-s3);
-            top: calc( var(--field-height) / 2 - ( var(--input-fontSize) / 2) );
-            z-index: -1;
-        }
-
-        &:not(:has(select)) input {
+        input {
             position: absolute;
             top: 0;
             left: 0;
@@ -218,6 +196,5 @@
 		font-size: 0.87rem;
         cursor: pointer;
 		color: #FFF;
-        cursor: pointer;
 	}
 }

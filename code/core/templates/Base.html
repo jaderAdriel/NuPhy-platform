@@ -48,8 +48,10 @@
 
   {% include './Header.html' %}
 
-  {% include './Sidebar.html' %}
+  {% block sidebar %}
 
+  {% endblock %}
+  
   <main id="main" class="main">
 
     <div class="pagetitle">
