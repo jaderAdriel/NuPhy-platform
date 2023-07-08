@@ -3,14 +3,14 @@ from django.shortcuts import get_object_or_404, render
 from Horario.forms import horarioForm, horarioModForm
 from Horario.models import Horario
 from accounts.models import Usuario
-from core.decorators import educador_required, nutri_required
+from core.decorators import educador_required, nutri_required, profissional_required
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect
 from django.contrib import messages
 # Create your views here.
 
 @login_required
-@user_passes_test(lambda user: not user.groups.filter(name='cliente').exists())
+@profissional_required
 def gerenciarHorario(request):
     horarios = Horario.objects.all()
     
