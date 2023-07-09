@@ -6,12 +6,11 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Principal</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{% static '/assets/favicon.png' %}" rel="icon">
+  <link href="{% static '/assets/logo.svg' %}" rel="icon">
   <link href="{% static '/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -53,16 +52,11 @@
   <main id="main" class="main">
     {% include './sidebar.html' %}
 
-    <div class="pagetitle">
-      <h1>Blank Page</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Pages</li>
-          <li class="breadcrumb-item active">Blank</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
+
+    {% block pagetitle %}
+
+    {% endblock %}
+  
 
     {% block content %}
 

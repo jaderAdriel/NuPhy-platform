@@ -77,7 +77,9 @@ def listarConsultasPorUsuario(request):
 def pesquisar(request):
    
     profissionais = Usuario.objects.exclude(id=request.user.id).filter(tipo__in=['N', 'EF'])
-    
+
+    print(profissionais)
+
     context = {
         'profissionais': profissionais,
         'user': request.user
