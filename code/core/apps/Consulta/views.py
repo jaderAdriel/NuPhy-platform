@@ -72,3 +72,30 @@ def listarConsultasPorUsuario(request):
         "consulta": consulta
     }
     return render(request, 'consulta/listar.html', context)
+
+
+def pesquisar(request):
+   
+    profissionais = Usuario.objects.exclude(id=request.user.id).filter(tipo__in=['N', 'EF'])
+    
+    context = {
+        'profissionais': profissionais,
+        'user': request.user
+    }
+
+    if request.method == 'GET':
+     # Definir os campos de filtro desejados
+        campos_filtro = ['tipo', 'cpf', 'codigoAutenticador', 'localAtendimento']
+        
+        # Aplicar filtros
+        for campo in campos_filtro:
+            valor = request.GET.get(campo)
+            context[campo] = ''
+            if valor:
+                context[campo] = valor
+                filtro = {campo + '__icontains': valor}
+                profissionais = profissionais.filter(**filtro)
+    
+    context['profissionais'] = profissionais
+
+    return render(request, 'consulta/procurar.html', context)

@@ -1,0 +1,47 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+
+<form class="row g-3 mb-3" action="/consulta/procurar_profissional/" method="GET">
+    <div class="col-md-6">
+        <div class="input-group">
+            <select name="tipo" class="form-select" id="animalSelect">
+                <option value="N" {% if tipo == 'N' %}selected{% endif %} >NUTRICIONISTA</option>
+                <option value="EF" {% if tipo == 'EF' %}selected{% endif %}>EDUCADOR FÍSICO</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" name="cpf" placeholder="Cpf do profissional" value="{{ cpf }}">
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" name="localAtendimento" id="localAtendimento" placeholder="local de atendimento" value="{{ localAtendimento }}">
+    </div>
+    <div class="col-md-6">
+        <input type="text" class="form-control" name="codigoAutenticador" id="codigoAutenticador" placeholder="Código de autenticação" value="{{ codigoAutenticador }}">
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="fas fa-search"></i> Procurar</button>
+    </div>
+</form>
+
+<!-- lista_usuarios.html -->
+
+<ul class="list-group">
+    {% for usuario in usuarios %}
+      <li class="list-group-item">
+        <a href="{% url 'detalhar_perfil' usuario.id %}">{{ usuario.username }}</a>
+      </li>
+    {% empty %}
+      <li class="list-group-item">Nenhum usuário encontrado.</li>
+    {% endfor %}
+</ul>
+  
+
+{% endblock %}
