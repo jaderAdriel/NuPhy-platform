@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from Horario.forms import horarioForm, horarioModForm
 from Horario.models import Horario
 from accounts.models import Usuario
-from core.decorators import educador_required, nutri_required, profissional_required
+from core.decorators import educador_required, nutri_required, profissional_required, owner_required
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -12,9 +12,7 @@ from django.contrib import messages
 @login_required
 @profissional_required
 def gerenciarHorario(request):
-    horarios = Horario.objects.all()
-    
-    print(f'${horarios} -> horarios')
+    horarios = Horario.objects.filter(profissional=request.user)
 
     context = {
         'horarios': horarios,
@@ -24,7 +22,7 @@ def gerenciarHorario(request):
     return render(request, "horario/index.html", context)
 
 @login_required
-@user_passes_test(lambda user: not user.groups.filter(name='cliente').exists())
+@profissional_required
 def criarHorario(request):
 
     context = {
@@ -50,42 +48,12 @@ def criarHorario(request):
     return render(request, "horario/index.html", context)
 
 
-# @login_required
-# @user_passes_test(lambda user: not user.groups.filter(name='cliente').exists())
-# def editarHorario(request, horario_id):
-#     horario = Horario.objects.get(pk=horario_id)
-    
-#     if request.method == "POST":
-#         form = horarioForm(request.POST, instance=horario)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect("/")
-#     else:
-#         form = horarioForm(instance=horario)
-    
-#     context ={
-#         'form': form,
-#         'horario_id': horario_id
-#     }
-    
-#     return render(request, "horario/formEditar.html", context)
-
-
-
-def deletarHorario(request, horario_id):
-    Horario.objects.get(pk=horario_id).delete()
+@login_required
+@profissional_required
+@owner_required(Horario, "profissional_id")
+def deletarHorario(request, obj_id):
+    Horario.objects.get(pk=obj_id).delete()
 
     messages.success(request, 'Horario deletado da agenda com sucesso.')
 
     return redirect(request.META.get('HTTP_REFERER'))
-
-
-
-def listarHorariosPorUsuario(request):
-    dono = request.user.id
-    horarios = Horario.objects.filter(profissional=dono)
-
-    context = {
-        "horarios": horarios
-    }
-    return render(request, 'horario/listar.html', context)
