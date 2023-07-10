@@ -10,13 +10,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('Horario', '0001_initial'),
-        ('Consulta', '0001_initial'),
+        ('accounts', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='consulta',
-            name='horario',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='consulta', to='Horario.horario'),
+            model_name='horario',
+            name='profissional',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='professionalH', to='accounts.usuario'),
         ),
     ]
