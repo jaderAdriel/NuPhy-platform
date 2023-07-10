@@ -42,8 +42,5 @@ class Usuario(User):
     
 
 
-# cliente
-# educador
-# nutri
-# admin
-# @Jubileu957
+# maicon -> jdr2003@
+# klebs -> @Admin123
