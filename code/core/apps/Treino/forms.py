@@ -4,7 +4,10 @@ from django import forms
 class treinoForm(forms.ModelForm):
     class Meta:
         model = Treino
-        exclude = ['profissional']
+        fields = '__all__'
+        widgets = {
+            'consulta': forms.HiddenInput(),
+        }
         
 class treinoModForm(forms.ModelForm):
     class Meta:

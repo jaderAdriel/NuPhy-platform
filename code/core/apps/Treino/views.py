@@ -13,11 +13,7 @@ def criarTreino(request):
     if request.method == "POST":
         form = treinoForm(request.POST)
         if form.is_valid():
-            treino = form.save(commit=False)
-            profissional_id = request.user.id
-            profissional = get_object_or_404(Usuario, id=profissional_id)
-            treino.profissional = profissional
-            treino.save()
+            treino = form.save()
             return HttpResponseRedirect("/")
     else:
         form = treinoForm()

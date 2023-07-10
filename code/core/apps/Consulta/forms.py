@@ -1,16 +1,14 @@
 from Horario.models import Horario
 from django import forms
-from .models import Consulta
+from .models import Consulta, Prontuario
 
-class consultaForm(forms.ModelForm):
+class ConsultaForm(forms.ModelForm):
     class Meta:
         model = Consulta
-        fields = ['horario',]
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        queryset = Horario.objects.exclude(horario__isnull=False)
-        self.fields['horario'].queryset = queryset
+        fields = ('horario',)
+        widgets = {
+            'horario': forms.HiddenInput(),
+        }
 
 class consultaModForm(forms.ModelForm):
     class Meta:

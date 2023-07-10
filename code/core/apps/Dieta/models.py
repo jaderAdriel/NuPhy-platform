@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import Usuario
 # Create your models here.
+from Consulta.models import Consulta
 
 class Dieta( models.Model ):
     
@@ -37,14 +38,8 @@ class Dieta( models.Model ):
         null=False
     )
 
-    paciente = models.ForeignKey(
-        Usuario, 
+    consulta = models.ForeignKey(
+        Consulta, 
         on_delete=models.CASCADE,
-        related_name='pacienteD',
-    )
-
-    profissional = models.ForeignKey(
-        Usuario, 
-        on_delete=models.CASCADE,
-        related_name='professionalD',
+        related_name='dieta',
     )

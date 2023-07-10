@@ -52,17 +52,17 @@
 
     <li class="list-group-item">Resultados: {{profissionais.count }}</li>
     
-    {% for usuario in profissionais %}
+    {% for profissional in profissionais %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" alt="" style="width: 45px; height: 45px"
             class="rounded-circle" />
           <div class="ms-3">
-            <div class="fw-bold">{{ usuario.first_name }} {{ usuario.last_name }}</div>
-            <div class="text-muted">{% if tipo == 'N' %}Nutricionista {% else %} Educador Físico {% endif %} </div>
+            <div class="fw-bold">{{ profissional.first_name }} {{ profissional.last_name }} @{{ profissional.last_name }}</div>
+            <div class="text-muted">{% if profissional.tipo == 'N' %}Nutricionista {% else %} Educador Físico {% endif %} </div>
           </div>
-        </div>
-        <a class="btn btn-link btn-rounded btn-sm" href="#" role="button">Ver</a>
+        </div><!-- template.html -->
+        <a class="btn btn-link btn-rounded btn-sm" href="{% url 'detalhar_perfil' profissional.id %}" role="button">Ver</a>
     </li>
     
     {% endfor %}

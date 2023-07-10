@@ -6,7 +6,8 @@ class horarioForm(forms.ModelForm):
         model = Horario
         exclude = ['profissional']
         widgets = {
-            'dia': forms.DateInput(attrs={'type': 'date'}),
+            'data': forms.DateInput(attrs={'type': 'date'}),
+            'hora': forms.DateInput(attrs={'type': 'time'}),
         }
         
 class horarioModForm(forms.ModelForm):

@@ -57,3 +57,15 @@ def deletarHorario(request, obj_id):
     messages.success(request, 'Horario deletado da agenda com sucesso.')
 
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+def verPerfilProfissional(request, id):
+    profissional = Usuario.objects.get(pk=id)
+    horarios = Horario.objects.filter(profissional=profissional).filter(preenchido=False)
+
+    context = {
+        'horarios': horarios,
+        'profissional': profissional
+    }
+
+    return render(request, "perfilProfissional.html", context)

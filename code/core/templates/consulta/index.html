@@ -1,0 +1,72 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Pesquisar profissionais</title>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="pagetitle">
+    <h1>Pesquisar profissionais</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item"><a href="/consulta/procurar_profissional/">Consultas</a></li>
+      </ol>
+    </nav>
+</div><!-- End Page Title -->
+{% endblock %}
+
+
+{% block content %}
+
+<form class="row g-3 mb-3" action="/consulta/" method="GET">
+
+    <div class="col-md-4">
+        <input type="text" class="form-control" name="paciente__cpf" placeholder="Cpf do cliente" value="{{ paciente__cpf }}">
+    </div>
+    <div class="col-md-4">
+        <input type="date" class="form-control" name="horario__data" id="horario__data" placeholder="Data" value="{{ data }}">
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="fas fa-search"></i> Filtrar </button>
+    </div>
+</form>
+
+<!-- lista_usuarios.html -->
+
+{% if consultas %}
+<ul class="list-group">
+
+    <li class="list-group-item">Resultados: {{consultas.count }}</li>
+    
+    {% for consulta in consultas %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <img src="{% static 'assets/document-1-svgrepo-com.svg' %}" alt="" style="width: 45px; height: 45px"
+            class="rounded-circle" />
+          <div class="ms-3">
+            <div class="fw-bold">{{ consulta.paciente.first_name }} {{ consulta.paciente.last_name }}</div>
+            <div class="text-muted">{{consulta.horario.data}} ás {{consulta.horario.hora}}</div>
+          </div>
+        </div><!-- template.html -->
+        <a class="btn btn-link btn-rounded btn-sm" href="{% url 'profissional_gerenciar_consulta' consulta.id %}" role="button">Ver</a>
+
+    </li>
+    
+    {% endfor %}
+</ul>
+{% else %}
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center py-4">
+        <span class="text-gray-600" >Nenhum resultado para sua consulta</h1>
+      </div>
+    </div>
+</div>
+  
+{% endif %}
+
+{% endblock %}
+

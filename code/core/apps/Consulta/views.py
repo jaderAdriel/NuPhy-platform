@@ -1,51 +1,32 @@
 from Consulta.models import Consulta
 from accounts.models import Usuario
-from Consulta.forms import consultaForm, consultaModForm
+from Horario.models import Horario
+from Prontuario.forms import ProntuarioForm
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-
+from Dieta.forms import dietaForm
+from Dieta.models import Dieta
+from Treino.forms import treinoForm
+from Treino.models import Treino
 # Create your views here.
 
 @login_required
 def criarConsulta(request):
-    
     if request.method == "POST":
-        form = consultaForm(request.POST)
-        if form.is_valid():
-            consulta = form.save(commit=False)
-            paciente_id = request.user.id
-            paciente = get_object_or_404(Usuario, id=paciente_id)
-            consulta.paciente = paciente
-            consulta.save()
-            return HttpResponseRedirect("/")
-    else:
-        form = consultaForm()
-    
-    context ={
-        'form': form
-    }
-    
-    return render(request, "consulta/formCriar.html", context)
 
+        id_horario = request.POST.get('horario')
+        horario = get_object_or_404(Horario, id=id_horario)
 
-def editarConsulta(request, consulta_id):
-    consulta = Consulta.objects.get(pk=consulta_id)
+        paciente = get_object_or_404(Usuario, id=request.user.id)
+
+        Consulta.objects.create(horario=horario, paciente=paciente)
+
+        horario.preenchido = True
+        horario.save()
     
-    if request.method == "POST":
-        form = consultaModForm(request.POST, instance=consulta)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect("/")
-    else:
-        form = consultaModForm(instance=consulta)
-    
-    context ={
-        'form': form,
-        'consulta_id': consulta_id
-    }
-    
-    return render(request, "consulta/formEditar.html", context)
+    return redirect("/consulta/listarConsultasPorUsuario/")
+
 
 @login_required
 def deletarConsulta(request, consulta_id):
@@ -53,25 +34,58 @@ def deletarConsulta(request, consulta_id):
     Consulta.objects.get(pk=consulta_id).delete()
     
     return HttpResponseRedirect("/")
+
+
     
+@login_required
+def gerenciarConsulta(request, consulta_id):
+    consulta = Consulta.objects.get(pk=consulta_id)
+    
+    profissional = Usuario.objects.get(pk=request.user.id)
+    if profissional.tipo == 'N':
+        formPlanoDeTrabalho = dietaForm(initial={'consulta': consulta.id})
+    else:
+        formPlanoDeTrabalho = treinoForm(initial={'consulta': consulta.id})
 
-def vizualizarConsulta(request):
-    consulta = Consulta.objects.all()
-
+    print(f'consulta id {consulta.id}')
     context = {
-        "consulta": consulta
+        "consulta": consulta,
+        "tipo": profissional.tipo,
+        "formProntuario": ProntuarioForm(initial={'consulta': consulta}),
+        "formPlanoDeTrabalho" : formPlanoDeTrabalho,
     }
-    return render(request, 'consulta/listartodos.html', context)
+
+    return render(request, 'consulta/profissionalGerenciarConsulta.html', context)
+
+
 
 @login_required
-def listarConsultasPorUsuario(request):
-    dono = request.user.id
-    consulta = Consulta.objects.filter(paciente=dono)
+def listarConsultasProfissional(request):
+    profissional = request.user.id
+
+    consultas = Consulta.objects.filter(horario__profissional=profissional)
 
     context = {
-        "consulta": consulta
+        "consultas": consultas
     }
-    return render(request, 'consulta/listar.html', context)
+
+    if request.method == 'GET':
+     # Definir os campos de filtro desejados
+        campos_filtro = ['horario__data', 'paciente__cpf']
+        
+        # Aplicar filtros
+        for campo in campos_filtro:
+            valor = request.GET.get(campo)
+            context[campo] = ''
+            if valor:
+                context[campo] = valor
+                filtro = {campo + '__icontains': valor}
+                consultas = consultas.filter(**filtro)
+    
+    context['consultas'] = consultas
+
+    return render(request, 'consulta/index.html', context)
+
 
 
 def pesquisar(request):
@@ -82,7 +96,7 @@ def pesquisar(request):
 
     context = {
         'profissionais': profissionais,
-        'user': request.user
+        'user': request.user,
     }
 
     if request.method == 'GET':

@@ -4,7 +4,10 @@ from django import forms
 class dietaForm(forms.ModelForm):
     class Meta:
         model = Dieta
-        exclude = ['profissional']
+        fields = '__all__'
+        widgets = {
+            'consulta': forms.HiddenInput(),
+        }
         
 class dietaModForm(forms.ModelForm):
     class Meta:

@@ -7,13 +7,10 @@ from accounts.models import Usuario
 # Create your models here.
 
 class Consulta( models.Model ):
-    horario =  OneToOneField(Horario, on_delete=models.CASCADE, related_name='horario')
+    horario =  OneToOneField(Horario, on_delete=models.CASCADE, related_name='consulta')
     
     paciente = models.ForeignKey(
         Usuario, 
         on_delete=models.CASCADE,
         related_name='pacienteC',
     )
-
-    def __str__(self):
-        return f'{self.horario} - {self.paciente}'

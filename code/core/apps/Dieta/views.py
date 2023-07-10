@@ -3,8 +3,8 @@ from Dieta.forms import dietaForm, dietaModForm
 from Dieta.models import Dieta
 from accounts.models import Usuario
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-
+from django.shortcuts import get_object_or_404, redirect, render
+from Consulta.models import Consulta
 # Create your views here.
 
 @nutri_required
@@ -14,11 +14,8 @@ def criarDieta(request):
         form = dietaForm(request.POST)
         if form.is_valid():
             dieta = form.save(commit=False)
-            profissional_id = request.user.id
-            profissional = get_object_or_404(Usuario, id=profissional_id)
-            dieta.profissional = profissional
-            dieta.save()
-            return HttpResponseRedirect("/")
+            # dieta.save()
+            # return HttpResponseRedirect("/")
     else:
         form = dietaForm()
     
@@ -26,7 +23,7 @@ def criarDieta(request):
         'form': form
     }
     
-    return render(request, "dieta/formCriar.html", context)
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def listarDietas(request):

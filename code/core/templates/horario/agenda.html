@@ -12,11 +12,13 @@
         const list = [
         {% for evento in horarios %}
           {
-            title: '{{ evento.status }}',
-            start: '{{ evento.dia|date:"Y-m-d" }}',
-            end: '{{ evento.dia|date:"Y-m-d" }}',
+            title: '{{ evento.hora }}',
+            start: '{{ evento.data|date:"Y-m-d" }}',
+            end: '{{ evento.data|date:"Y-m-d" }}',
             id_horario: '{{ evento.id }}',
-            status: '{{ evento.status }}',
+            data: '{{ evento.data }}',
+            horario: '{{ evento.hora }}',
+            status: '{{ evento.preenchido }}',
 
           },
           {% endfor %}
@@ -34,8 +36,8 @@
                     if (event ) {
                       
                       // Preenche as informações do evento no modal
-                      document.getElementById('eventTitle').textContent = 'Status: ' + event.extendedProps.status;
-                      document.getElementById('eventStart').textContent = 'Horario: ' + Date(event.title).normalize();
+                      document.getElementById('eventTitle').textContent = 'Status: ' + event.extendedProps.status != 'False' ? "Prenchido" : "Vago" ;
+                      document.getElementById('eventStart').textContent = `Data: ${event.extendedProps.data} ás ${event.extendedProps.horario}  `;
                       
                       // Abre o modal
                       const modal = document.getElementById('eventModal');
