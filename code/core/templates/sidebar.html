@@ -1,3 +1,4 @@
+{% load static %}
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
@@ -8,36 +9,35 @@
                 {% for group in user.groups.all %}
                     {% if group.name == 'Administrador' %}
                       <li class="nav-item">
-                        <a class="nav-link collapsed" href="/animal/listar/">
-                          <i class="fas fa-calendar-check"></i>
-                          <span>asdsad</span>
+                        <a class="nav-link collapsed" href="{% url 'listar_usuarios_pendentes' %}">
+                          <i class="fas fa-box-check"></i>
+                          <span>Autorizar usuarios</span>
                         </a>
                       </li>
                     {% elif group.name == 'Cliente'%}
                       <li class="nav-item">
-                        <a class="nav-link collapsed" href="/animal/pesquisar/">
+                        <a class="nav-link collapsed" href="{% url 'procurar_profissional' %}">
                           <i class="fas fa-search"></i>
-                          <span>Procurar</span>
+                          <span>Procurar consulta</span>
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link collapsed" href="/animal/listar/">
-                          <i class="fas fa-clipboard"></i>
+                        <a class="nav-link collapsed" href="{% url 'listar_consultas_por_cliente' %}">
+                          <i class="fas fa-clipboard-check"></i>
                           <span>Consultas</span>
                         </a>
                       </li>
-                    {% elif group.name == 'Nutricionista' %}
+                    {% elif group.name == 'Nutricionista' or group.name == 'Educador Fisico' %}
                       <li class="nav-item">
-                        <a class="nav-link collapsed" href="{% url 'home' %}">
-                          <i class="fas fa-utensils"></i>
-                          <span>Dieta</span>
+                        <a class="nav-link collapsed" href="{% url 'listar_consultas_por_profissional' %}">
+                          <i class="fas fa-clipboard-check"></i>
+                          <span>Consultas</span>
                         </a>
                       </li>
-                      {% elif group.name == 'Educador Fisico'  %}
                       <li class="nav-item">
-                        <a class="nav-link collapsed" href="/match/gerenciar/">
-                          <i class="fas fa-dumbbell"></i>
-                          <span>Treino</span>
+                        <a class="nav-link collapsed" href="{% url 'gerenciarHorario' %}">
+                          <i class="fas fa-calendar"></i>
+                          <span>Agenda</span>
                         </a>
                       </li>
                     {% endif %}
