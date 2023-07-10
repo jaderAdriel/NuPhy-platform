@@ -1,0 +1,15 @@
+{% load static %}
+
+<li class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <img src="{% static 'assets/' %}{% if tipo == 'N' %}dieta{% else %}treino{% endif %}.svg" alt="" style="width: 30px; height: 30px" class="rounded-circle" />
+      <div class="ms-3">
+        <div class="fw-bold">{{ plano.diaSemana }}</div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-link btn-rounded btn-sm" data-bs-toggle="modal" data-bs-target="#planoTrabalho" 
+      data-id="{{ plano.id }}"
+    >
+      Ver
+    </button>
+</li>

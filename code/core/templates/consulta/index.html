@@ -44,8 +44,8 @@
     {% for consulta in consultas %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <img src="{% static 'assets/document-1-svgrepo-com.svg' %}" alt="" style="width: 45px; height: 45px"
-            class="rounded-circle" />
+          <img src="{% static 'assets/document-1-svgrepo-com.svg' %}" alt="" style="width: 40px; height: 45px"
+            />
           <div class="ms-3">
             <div class="fw-bold">{{ consulta.paciente.first_name }} {{ consulta.paciente.last_name }}</div>
             <div class="text-muted">{{consulta.horario.data}} ás {{consulta.horario.hora}}</div>

@@ -14,12 +14,12 @@ from Treino.models import Treino
 @login_required
 def criarConsulta(request):
     if request.method == "POST":
-
+        print(request.user.id)
         id_horario = request.POST.get('horario')
+        id_usuario = request.user.id
         horario = get_object_or_404(Horario, id=id_horario)
-
-        paciente = get_object_or_404(Usuario, id=request.user.id)
-
+        paciente = Usuario.objects.get(pk=id_usuario)
+        
         Consulta.objects.create(horario=horario, paciente=paciente)
 
         horario.preenchido = True

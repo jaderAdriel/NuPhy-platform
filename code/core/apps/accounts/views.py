@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from accounts.models import Usuario
 from .forms import RegistroUsuarioForm
-# from .permissions import set_permissions
+from .permissions import set_permissions
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -23,7 +23,7 @@ def cadastrar(request):
                 usuario.is_active = False
 
             usuario.save()
-            # usuario = set_permissions(usuario)
+            usuario = set_permissions(usuario)
 
             return redirect('/accounts/login/')
     
