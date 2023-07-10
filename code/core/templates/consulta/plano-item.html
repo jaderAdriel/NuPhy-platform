@@ -9,6 +9,7 @@
     </div>
     <button type="button" class="btn btn-link btn-rounded btn-sm" data-bs-toggle="modal" data-bs-target="#planoTrabalho" 
       data-id="{{ plano.id }}"
+      data-tipo="{% if tipo == 'N' %}dieta{% else %}treino{% endif %}"
     >
       Ver
     </button>
