@@ -14,8 +14,7 @@ def criarDieta(request):
         form = dietaForm(request.POST)
         if form.is_valid():
             dieta = form.save(commit=False)
-            # dieta.save()
-            # return HttpResponseRedirect("/")
+            dieta.save()
     else:
         form = dietaForm()
     

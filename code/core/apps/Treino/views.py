@@ -3,7 +3,7 @@ from Treino.forms import treinoForm, treinoModForm
 from accounts.models import Usuario
 from core.decorators import educador_required, nutri_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 
 # Create your views here.
 
@@ -14,7 +14,6 @@ def criarTreino(request):
         form = treinoForm(request.POST)
         if form.is_valid():
             treino = form.save()
-            return HttpResponseRedirect("/")
     else:
         form = treinoForm()
     
@@ -22,7 +21,7 @@ def criarTreino(request):
         'form': form
     }
     
-    return render(request, "treino/formCriar.html", context)
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 def listarTreinos(request):
