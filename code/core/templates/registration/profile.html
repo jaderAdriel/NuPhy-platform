@@ -1,19 +1,88 @@
-{% extends 'base.html' %}
+{% extends 'Base.html' %}
+
+{% block head %}
+<title> {{ profissional.last_name }} no NuPhy </title>
+{% endblock %}
+
 
 {% block content %}
-<!-- <div class="row">
-    <div class="col-md-4">
-        <div class="list-group">
-          <a href="{% url 'listarConsultasPorUsuario' %}" class="list-group-item">Minhas Consultas</a>&nbsp;&nbsp;
-          <a href="{% url 'listarTreinoPorUsuario' %}" class="list-group-item">Meus Treinos</a>&nbsp;&nbsp;
-          <a href="{% url 'listarDietaPorUsuario' %}" class="list-group-item">Minhas Dietas</a>&nbsp;&nbsp;
-          <a href="{% url 'listarConsultasPorUsuario' %}" class="list-group-item">Prontuarios</a>&nbsp;&nbsp;
-          {% if request.user.is_staff or request.user.is_superuser %}
-          <a href="/medicos/agendas/" class="list-group-item">Agendas</a>&nbsp;&nbsp;
-          <a href="{% url 'vizualizarConsulta' %}" class="list-group-item">Consultas</a>&nbsp;&nbsp;
-          <a href="/medicos/admim/lista/medicos/" class="list-group-item">Medicos</a>&nbsp;&nbsp;
-          <a href="/medicos/admim/lista/especialidades/" class="list-group-item">Especialidade</a>&nbsp;&nbsp;
-          {% endif %}
+
+
+<section class="section profile">
+    <div class="row">
+      <div class="col-xl-4">
+
+        <div class="card">
+          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+            <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" alt="Profile" class="rounded-circle">
+            <h2>{{ profissional.first_name }} {{ profissional.last_name }}</h2>
+            <h3>{% if profissional.tipo == 'N' %} Nutricionista {% elif profissional.tipo == 'ED' %} Educador Físico {% endif %}</h3>
+            <div class="social-links mt-2">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
         </div>
-    </div> -->
-{% endblock %}
+
+      </div>
+
+      <div class="col-xl-8">
+
+        <div class="card">
+          <div class="card-body pt-3">
+            <!-- Bordered Tabs -->
+            <ul class="nav nav-tabs nav-tabs-bordered">
+
+              <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+              </li>
+
+            </ul>
+            <div class="tab-content pt-2">
+
+              <div class="tab-pane show active fade pt-3 " id="profile-overview">
+
+                <h5 class="card-title">Detalhes do perfil</h5>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label ">Nome completo</div>
+                  <div class="col-lg-9 col-md-8">{{user.username}} {{ user.last_name }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Profissição</div>
+                  <div class="col-lg-9 col-md-8">{{ user.get_tipo_display }}</div>
+                </div>
+
+                {% if profissional.localAtendimento  %}
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Local atendimento</div>
+                  <div class="col-lg-9 col-md-8"> {{ user.email }}</div>
+                </div>
+                {% endif %}
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Email</div>
+                  <div class="col-lg-9 col-md-8">{{ profissional.email }}</div>
+                </div>
+
+              </div>
+
+
+            </div><!-- End Bordered Tabs -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<!-- Modal inicio -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'></script>
+{% endblock%}

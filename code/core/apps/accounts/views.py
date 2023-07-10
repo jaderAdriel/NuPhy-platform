@@ -36,7 +36,11 @@ def cadastrar(request):
 
 @login_required
 def profile(request):
-    return render(request, 'registration/profile.html')
+    user = request.user
+    context = {
+        'user' : user,
+    }
+    return render(request, 'registration/profile.html', context=context)
 
 
 @login_required
