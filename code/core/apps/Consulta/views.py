@@ -9,9 +9,12 @@ from Dieta.forms import dietaForm
 from Dieta.models import Dieta
 from Treino.forms import treinoForm
 from Treino.models import Treino
+from core.decorators import educador_required, nutri_required, profissional_required, owner_required
+
 # Create your views here.
 
 @login_required
+@profissional_required
 def criarConsulta(request):
     if request.method == "POST":
         print(request.user.id)
@@ -29,6 +32,7 @@ def criarConsulta(request):
 
 
 @login_required
+@profissional_required
 def deletarConsulta(request, consulta_id):
     
     Consulta.objects.get(pk=consulta_id).delete()
@@ -38,6 +42,7 @@ def deletarConsulta(request, consulta_id):
 
     
 @login_required
+@profissional_required
 def gerenciarConsulta(request, consulta_id):
     consulta = Consulta.objects.get(pk=consulta_id)
     
@@ -60,6 +65,7 @@ def gerenciarConsulta(request, consulta_id):
 
 
 @login_required
+@profissional_required
 def listarConsultasProfissional(request):
     profissional = request.user.id
 
