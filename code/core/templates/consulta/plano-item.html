@@ -7,10 +7,20 @@
         <div class="fw-bold">{{ plano.diaSemana }}</div>
       </div>
     </div>
-    <button type="button" class="btn btn-link btn-rounded btn-sm" data-bs-toggle="modal" data-bs-target="#planoTrabalho" 
-      data-id="{{ plano.id }}"
-      data-tipo="{% if tipo == 'N' %}dieta{% else %}treino{% endif %}"
-    >
-      Ver
-    </button>
+
+    <div class="d-flex">
+      {% if consulta.paciente.id != request.user.id %}
+      <form action="{% if tipo == 'N' %}/dieta/{% else %}/treino/{% endif %}/deletar/{plano.id}" method="POST">
+        <button type="submit" class="btn btn-link text-black "><i class="fas fa-trash"></i> Apagar</button>
+      </form>
+      <form action="{% if tipo == 'N' %}/dieta/{% else %}/treino/{% endif %}/editar/{plano.id}" method="POST">
+        <button type="submit" class="btn btn-link text-black"><i class="fas fa-pen"></i> Editar</button>
+      </form>
+      
+      {% endif %}
+      <form action="{% if tipo == 'N' %}/dieta/{% else %}/treino/{% endif %}/detalhar/{plano.id}" method="POST">
+        <button type="submit" class="btn btn-link text-black  ">Ver <i class="fas fa-angle-right"></i></button>
+      </form>
+    </div>
+
 </li>
