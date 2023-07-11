@@ -4,21 +4,24 @@
     <div class="d-flex align-items-center">
       <img src="{% static 'assets/' %}{% if tipo == 'N' %}dieta{% else %}treino{% endif %}.svg" alt="" style="width: 30px; height: 30px" class="rounded-circle" />
       <div class="ms-3">
-        <div class="fw-bold">{{ plano.diaSemana }}</div>
+        <div class="fw-bold">{{ plano.get_diaSemana_display }}</div>
       </div>
     </div>
 
     <div class="d-flex">
-      {% if consulta.paciente.id != request.user.id %}
-      <form action="{% if tipo == 'N' %}/dieta/{% else %}/treino/{% endif %}/deletar/{plano.id}" method="POST">
+      {% if consulta.paciente.id != request.user.id and consulta.horario.profissional.id == request.user.id  %}
+      <form action="/{% if tipo == 'N' %}dieta/{% else %}treino/{% endif %}deletar/{{plano.id}}/" method="POST">
+        {% csrf_token %}
         <button type="submit" class="btn btn-link text-black "><i class="fas fa-trash"></i> Apagar</button>
       </form>
-      <form action="{% if tipo == 'N' %}/dieta/{% else %}/treino/{% endif %}/editar/{plano.id}" method="POST">
+      <form action="/{% if tipo == 'N' %}dieta/{% else %}treino/{% endif %}editar/{{plano.id}}/" method="POST">
+        {% csrf_token %}
         <button type="submit" class="btn btn-link text-black"><i class="fas fa-pen"></i> Editar</button>
       </form>
       
       {% endif %}
-      <form action="{% if tipo == 'N' %}/dieta/{% else %}/treino/{% endif %}/detalhar/{plano.id}" method="POST">
+      <form action="/{% if tipo == 'N' %}dieta/{% else %}treino/{% endif %}detalhar/{{plano.id}}/" method="POST">
+        {% csrf_token %}
         <button type="submit" class="btn btn-link text-black  ">Ver <i class="fas fa-angle-right"></i></button>
       </form>
     </div>

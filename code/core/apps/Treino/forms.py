@@ -5,11 +5,11 @@ class treinoForm(forms.ModelForm):
     class Meta:
         model = Treino
         fields = '__all__'
-        widgets = {
-            'consulta': forms.HiddenInput(),
-        }
         
 class treinoModForm(forms.ModelForm):
     class Meta:
         model = Treino
         fields = '__all__'
+        widgets = {
+            'consulta': forms.HiddenInput(),
+        }

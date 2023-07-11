@@ -15,6 +15,7 @@ def criarDieta(request):
         if form.is_valid():
             dieta = form.save(commit=False)
             dieta.save()
+            return redirect(f'/consulta/detalhar/{dieta.consulta.id}/')
     else:
         form = dietaForm()
     
@@ -25,55 +26,43 @@ def criarDieta(request):
     return redirect(request.META.get('HTTP_REFERER'))
 
 
-def listarDietas(request):
-    dieta = Dieta.objects.all()
-
-    context = {
-        "dieta": dieta
-    }
-    return render(request, 'dieta/listartodos.html', context)
-
-
 def editarDieta(request, dieta_id):
     dieta = Dieta.objects.get(pk=dieta_id)
-    
+
+   
+
     if request.method == "POST":
-        form = dietaModForm(request.POST, instance=dieta)
+        form = dietaForm(request.POST, instance=dieta)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/")
+            return redirect(f'/consulta/detalhar/{dieta.consulta.id}/')
     else:
-        form = dietaModForm(instance=dieta)
-    
+        form = dietaForm(instance=dieta)
+
     context ={
         'form': form,
-        'dieta_id': dieta_id
+        "dieta": dieta
     }
     
-    return render(request, "dieta/formEditar.html", context)
+    return render(request, "editarPlanoTrabalho.html", context)
 
 
 def deletarDieta(request, dieta_id):
     
-    Dieta.objects.get(pk=dieta_id).delete()
+    dieta = Dieta.objects.get(pk=dieta_id)
+    consulta_id = dieta.consulta.id
+    dieta.delete()
     
-    return HttpResponseRedirect("/")
+    return redirect(f'/consulta/detalhar/{consulta_id}/')
 
 
 def detalharDieta(request, dieta_id):
-    dieta = Dieta.objects.filter(id=dieta_id)
+    dieta = Dieta.objects.get(pk=dieta_id)
 
     context = {
         "dieta": dieta
     }
-    return render(request, 'dieta/detalhar.html', context)
+
+    return render(request, 'detalharPlanoTrabalho.html', context)
 
 
-def listarDietaPorUsuario(request):
-    dono = request.user.id
-    dieta = Dieta.objects.filter(paciente=dono)
-
-    context = {
-        "dieta": dieta
-    }
-    return render(request, 'dieta/listar.html', context)

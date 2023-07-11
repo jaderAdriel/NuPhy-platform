@@ -2,7 +2,7 @@ from Treino.models import Treino
 from Treino.forms import treinoForm, treinoModForm
 from accounts.models import Usuario
 from core.decorators import educador_required, nutri_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 
 # Create your views here.
@@ -14,23 +14,11 @@ def criarTreino(request):
         form = treinoForm(request.POST)
         if form.is_valid():
             treino = form.save()
-    else:
-        form = treinoForm()
     
-    context ={
-        'form': form
-    }
     
     return redirect(request.META.get('HTTP_REFERER'))
 
-
-def listarTreinos(request):
-    treino = Treino.objects.all()
-
-    context = {
-        "treino": treino
-    }
-    return render(request, 'treino/listartodos.html', context)
+##################
 
 def editarTreino(request, treino_id):
     treino = Treino.objects.get(pk=treino_id)
@@ -39,35 +27,31 @@ def editarTreino(request, treino_id):
         form = treinoModForm(request.POST, instance=treino)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/")
+            return redirect(f'/consulta/detalhar/{treino.consulta.id}/')
     else:
         form = treinoModForm(instance=treino)
     
     context ={
         'form': form,
-        'treino_id': treino_id
     }
     
-    return render(request, "treino/formEditar.html", context)
+    return render(request, "editarPlanoTrabalho.html", context)
+
+##################
 
 def deletarTreino(request, treino_id):
     Treino.objects.get(pk=treino_id).delete()
     
-    return HttpResponseRedirect("/")
+    return redirect(request.META.get('HTTP_REFERER'))
 
-def visualizarTreino(request, treino_id):
-    treino = Treino.objects.filter(id=treino_id)
 
-    context = {
-        "treino": treino
-    }
-    return render(request, 'treino/detalhar.html', context)
+#################
 
-def listarTreinoPorUsuario(request):
-    dono = request.user.id
-    treino = Treino.objects.filter(paciente=dono)
+def detalharTreino(request, treino_id):
+    treino = Treino.objects.get(pk=treino_id)
 
     context = {
         "treino": treino
     }
-    return render(request, 'treino/listar.html', context)
+    
+    return render(request, 'detalharPlanoTrabalho.html', context)

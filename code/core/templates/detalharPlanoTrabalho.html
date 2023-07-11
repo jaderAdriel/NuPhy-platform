@@ -1,0 +1,81 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Agenda de {{ request.user.username }} </title>
+{% endblock %}
+
+{% block pagetitle %}
+<div class="pagetitle">
+    <h1>Gerenciar consulta</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item"><a href="/consulta/listarConsultasProfissional/">Consultas</a></li>
+        <li class="breadcrumb-item"><a href="/consulta/detalhar/{% if treino %}{{ treino.consulta.id}}{%else%}{{ dieta.consulta.id}}{%endif%}/">Consulta</a></li>
+        <li class="breadcrumb-item">
+            Detalhar {% if treino %}treino {{ treino.get_diaSemana_display }}{%else%}dieta {{ dieta.get_diaSemana_display }}{%endif%}
+        </li>
+      </ol>
+    </nav>
+</div><!-- End Page Title -->
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    
+
+    <div class="row">
+        <div class="card">
+            <div class="card-header pb-0 p-3">
+                <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <h5 class="card-title">Informaçoes sobre {% if treino %}o treino{%else%}a dieta{%endif%}</h5>
+                </div>
+                </div>
+            </div>  
+            <div class="card-body p-3">
+                {% if treino %}
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Exercicio</div>
+                        <div class="col-lg-9 col-md-8"> {{ treino.exercicio }} </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Dia semana</div>
+                        <div class="col-lg-9 col-md-8"> {{ treino.get_diaSemana_display }} </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Repetiçoes</div>
+                        <div class="col-lg-9 col-md-8"> {{ treino.repeticao }} </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Série</div>
+                        <div class="col-lg-9 col-md-8"> {{ treino.serie }} </div>
+                    </div>
+                {% endif %}
+                {% if dieta %}
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Alimento</div>
+                        <div class="col-lg-9 col-md-8"> {{ dieta.alimento }} </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Dia semana</div>
+                        <div class="col-lg-9 col-md-8"> {{ dieta.get_diaSemana_display }} </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Quantidade</div>
+                        <div class="col-lg-9 col-md-8"> {{ dieta.quantidade }} </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-4 fw-bold">Horario</div>
+                        <div class="col-lg-9 col-md-8"> {{ dieta.horario }} </div>
+                    </div>
+                {% endif %} 
+          
+        </div>        
+    </div>
+</div>
+{% endblock %}

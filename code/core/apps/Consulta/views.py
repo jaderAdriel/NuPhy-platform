@@ -63,6 +63,19 @@ def gerenciarConsulta(request, consulta_id):
     return render(request, 'consulta/profissionalGerenciarConsulta.html', context)
 
 
+@login_required
+def detalharConsulta(request, consulta_id):
+    consulta = Consulta.objects.get(pk=consulta_id)
+    
+    context = {
+        "consulta": consulta,
+        "tipo": consulta.horario.profissional.tipo
+    }
+    
+    return render(request, 'consulta/ClienteVizualizaConsulta.html', context)
+
+
+
 
 @login_required
 @profissional_required
