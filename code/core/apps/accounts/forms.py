@@ -13,3 +13,10 @@ class RegistroUsuarioForm(UserCreationForm):
 
         if tipo in ('EF', 'N') and not codigo_autenticador:
             self.add_error('codigoAutenticador', 'Campo obrigatório para o tipo selecionado')
+
+
+class editarUsuario(UserCreationForm):
+    class Meta:
+        model = Usuario
+        fields = ["first_name", "last_name", "email", "localAtendimento"]
+

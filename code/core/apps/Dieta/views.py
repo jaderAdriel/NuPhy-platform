@@ -29,8 +29,6 @@ def criarDieta(request):
 def editarDieta(request, dieta_id):
     dieta = Dieta.objects.get(pk=dieta_id)
 
-   
-
     if request.method == "POST":
         form = dietaForm(request.POST, instance=dieta)
         if form.is_valid():

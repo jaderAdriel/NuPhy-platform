@@ -1,7 +1,7 @@
 {% extends 'Base.html' %}
-
+{% load bootstrap %}
 {% block head %}
-<title> {{ profissional.last_name }} no NuPhy </title>
+<title> Perfil </title>
 {% endblock %}
 
 
@@ -16,8 +16,8 @@
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" alt="Profile" class="rounded-circle">
-            <h2>{{ profissional.first_name }} {{ profissional.last_name }}</h2>
-            <h3>{% if profissional.tipo == 'N' %} Nutricionista {% elif profissional.tipo == 'ED' %} Educador Físico {% endif %}</h3>
+            <h2>{{ usuario.first_name }} {{ usuario.last_name }}</h2>
+            <h3>{% if usuario.tipo == 'N' %} Nutricionista {% elif usuario.tipo == 'ED' %} Educador Físico {% endif %}</h3>
             <div class="social-links mt-2">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -39,6 +39,10 @@
               <li class="nav-item">
                 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
               </li>
+              <li class="nav-item">
+                
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-editar">Editar perfil</button>
+              </li>
 
             </ul>
             <div class="tab-content pt-2">
@@ -52,26 +56,46 @@
                   <div class="col-lg-9 col-md-8">{{user.username}} {{ user.last_name }}</div>
                 </div>
 
+                {% if usuario.tipo == 'N' or usuario.tipo == 'ED' %}
+
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Profissição</div>
-                  <div class="col-lg-9 col-md-8">{{ user.get_tipo_display }}</div>
+                  <div class="col-lg-3 col-md-4 label">Tipo</div>
+                  <div class="col-lg-9 col-md-8">{% if usuario.tipo == 'N' %} Nutricionista {% elif usuario.tipo == 'ED' %} Educador Físico {% endif %}</div>
                 </div>
 
-                {% if profissional.localAtendimento  %}
+                
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">{% if usuario.tipo == 'N' %} CRN {% elif usuario.tipo == 'ED' %} CREF {% endif %}</div>
+                  <div class="col-lg-9 col-md-8">{{usuario.codigoAutenticador}}</div>
+                </div>
+                {% endif %}
+
+                {% if usuario.tipo == 'N' or usuario.tipo == 'ED' %}
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Local atendimento</div>
-                  <div class="col-lg-9 col-md-8"> {{ user.email }}</div>
+                  <div class="col-lg-9 col-md-8"> {{ usuario.localAtendimento}}</div>
                 </div>
                 {% endif %}
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Email</div>
-                  <div class="col-lg-9 col-md-8">{{ profissional.email }}</div>
+                  <div class="col-lg-9 col-md-8">{{ usuario.email }}</div>
                 </div>
 
               </div>
 
+              <div class="tab-pane fade pt-3 " id="profile-editar">
 
+                <h5 class="card-title">Editar informações</h5>
+
+                <form action="{% url 'editarPerfil' %}" method="POST">
+                  {% csrf_token %}
+                  {{form|bootstrap}}
+                  <button type="submit" class="btn btn-primary">Salvar alteraçoes</button>
+
+                </form>
+
+              </div>
             </div><!-- End Bordered Tabs -->
 
           </div>

@@ -75,14 +75,16 @@ def detalharConsulta(request, consulta_id):
     return render(request, 'consulta/ClienteVizualizaConsulta.html', context)
 
 
-
-
 @login_required
-@profissional_required
 def listarConsultasProfissional(request):
-    profissional = request.user.id
+    id_usuario = request.user.id
+    consultas = []
+    usuario_grupos = request.user.groups 
 
-    consultas = Consulta.objects.filter(horario__profissional=profissional)
+    if "Nutricionista" or "Educador Fisico" in usuario_grupos:
+        consultas = Consulta.objects.filter(horario__profissional=id_usuario)
+    else:
+        consultas = Consulta.objects.filter(horario__paciente=id_usuario)
 
     context = {
         "consultas": consultas

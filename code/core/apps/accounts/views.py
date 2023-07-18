@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from accounts.models import Usuario
-from .forms import RegistroUsuarioForm
+from .forms import RegistroUsuarioForm, editarUsuario
 from .permissions import set_permissions
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import redirect
@@ -36,12 +36,26 @@ def cadastrar(request):
 
 @login_required
 def profile(request):
-    user = request.user
+    user = Usuario.objects.get(pk=request.user.id)
     context = {
-        'user' : user,
+        'usuario' : user,
+        'form' : editarUsuario(instance=user)
     }
     return render(request, 'registration/profile.html', context=context)
 
+
+
+@login_required
+def editarPerfil(request):
+    if request.method == 'POST':
+        user = Usuario.objects.get(pk=request.user.id)
+        form =  editarUsuario(request.POST, instance=user )
+
+        if form.is_valid():
+            form.save()
+
+    return redirect(request.META.get('HTTP_REFERER'))
+    
 
 @login_required
 @user_passes_test(lambda user: user.is_staff)
