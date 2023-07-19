@@ -14,7 +14,6 @@ from core.decorators import educador_required, nutri_required, profissional_requ
 # Create your views here.
 
 @login_required
-@profissional_required
 def criarConsulta(request):
     if request.method == "POST":
         print(request.user.id)
@@ -28,7 +27,7 @@ def criarConsulta(request):
         horario.preenchido = True
         horario.save()
     
-    return redirect("/consulta/listarConsultasPorUsuario/")
+    return redirect("/consulta/listarConsultasCliente/")
 
 
 @login_required
@@ -79,14 +78,15 @@ def detalharConsulta(request, consulta_id):
 def listarConsultasProfissional(request):
     id_usuario = request.user.id
     consultas = []
-    usuario_grupos = request.user.groups 
+    usuario = Usuario.objects.get(id=id_usuario) 
 
-    if "Nutricionista" or "Educador Fisico" in usuario_grupos:
+    if usuario.tipo == 'N' or usuario.tipo == 'EF' :
         consultas = Consulta.objects.filter(horario__profissional=id_usuario)
     else:
-        consultas = Consulta.objects.filter(horario__paciente=id_usuario)
+        consultas = Consulta.objects.filter(paciente=id_usuario)
 
     context = {
+        "tipo" : usuario.tipo,
         "consultas": consultas
     }
 

@@ -51,7 +51,7 @@
             <div class="text-muted">{{consulta.horario.data}} ás {{consulta.horario.hora}}</div>
           </div>
         </div><!-- template.html -->
-        <a class="btn btn-link btn-rounded btn-sm" href="{% url 'profissional_gerenciar_consulta' consulta.id %}" role="button">Ver</a>
+        <a class="btn btn-link btn-rounded btn-sm" href="{% if tipo == 'N' or tipo == 'EF' %}{% url 'profissional_gerenciar_consulta' consulta.id %} {% else %} {% url 'detalhar_consulta' consulta.id %} {% endif %}" role="button">Ver</a>
 
     </li>
     
