@@ -24,15 +24,17 @@ def editarTreino(request, treino_id):
     treino = Treino.objects.get(pk=treino_id)
     
     if request.method == "POST":
-        form = treinoModForm(request.POST, instance=treino)
+        form = treinoForm(request.POST, instance=treino)
+        id_consulta = request.POST.get('consulta')
+        form.consulta = id_consulta
         if form.is_valid():
             form.save()
             return redirect(f'/consulta/detalhar/{treino.consulta.id}/')
-    else:
-        form = treinoModForm(instance=treino)
-    
+
+
     context ={
-        'form': form,
+        'form': treinoForm(instance=treino),
+        'dieta': treino
     }
     
     return render(request, "editarPlanoTrabalho.html", context)

@@ -31,15 +31,16 @@ def editarDieta(request, dieta_id):
 
     if request.method == "POST":
         form = dietaForm(request.POST, instance=dieta)
+        id_consulta = request.POST.get('consulta')
+        form.consulta = id_consulta
         if form.is_valid():
             form.save()
             return redirect(f'/consulta/detalhar/{dieta.consulta.id}/')
-    else:
-        form = dietaForm(instance=dieta)
+
 
     context ={
-        'form': form,
-        "dieta": dieta
+        'form': dietaForm(instance=dieta),
+        'dieta': dieta
     }
     
     return render(request, "editarPlanoTrabalho.html", context)
