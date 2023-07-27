@@ -46,9 +46,9 @@
             {% else %}
 
             <li class="nav-item">
-              <a class="nav-link collapsed" href="/match/gerenciar/">
+              <a class="nav-link collapsed" href="{% url 'login' %}">
                 <i class="fas fa-dumbbell"></i>
-                <span>{{user.username}}</span>
+                <span>Login</span>
               </a>
             </li>
             {% endif %}  
