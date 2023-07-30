@@ -17,7 +17,6 @@ def cadastrar(request):
         if form.is_valid():
             
             usuario = form.save(commit=False)
-            print(form.cleaned_data)
 
             if usuario.tipo != "C": 
                 usuario.is_active = False

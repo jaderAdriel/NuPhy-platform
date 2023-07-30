@@ -16,7 +16,6 @@ from core.decorators import educador_required, nutri_required, profissional_requ
 @login_required
 def criarConsulta(request):
     if request.method == "POST":
-        print(request.user.id)
         id_horario = request.POST.get('horario')
         id_usuario = request.user.id
         horario = get_object_or_404(Horario, id=id_horario)
@@ -51,7 +50,6 @@ def gerenciarConsulta(request, consulta_id):
     else:
         formPlanoDeTrabalho = treinoForm(initial={'consulta': consulta.id})
 
-    print(f'consulta id {consulta.id}')
     context = {
         "consulta": consulta,
         "tipo": profissional.tipo,
@@ -112,8 +110,6 @@ def listarConsultasProfissional(request):
 def pesquisar(request):
    
     profissionais = Usuario.objects.exclude(id=request.user.id).filter(tipo__in=['N', 'EF'])
-
-    print(profissionais)
 
     context = {
         'profissionais': profissionais,
