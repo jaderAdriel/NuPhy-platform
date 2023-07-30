@@ -5,6 +5,7 @@ django-discover-runner==1.0
 django-extensions==3.2.1
 django-multiselectfield==0.1.12
 django-role-permissions==3.1.1
+Pillow==10.0.0
 pydot==1.4.2
 pygraphviz==1.10
 pyparsing==3.0.9
