@@ -10,10 +10,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <title>Chain App Dev - App Landing Page HTML5 Template</title>
+    <title>Nutri Ativo</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'home/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -56,8 +57,9 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">
-              <img src="{% static 'home/assets/images/logo.png'%}" alt="Chain App Dev">
+            <a href="{% url 'home'%}" class="logo d-flex align-items-center">
+              <img src="{% static '/assets/logo.png' %}" alt="oi">
+              <span class="d-none d-lg-block">NuPhy</span>
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
@@ -106,8 +108,8 @@ https://templatemo.com/tm-570-chain-app-dev
               <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                 <div class="row">
                   <div class="col-lg-12">
-                    <h2>Get The Latest App From App Stores</h2>
-                    <p>Chain App Dev is an app landing page HTML5 template based on Bootstrap v5.1.3 CSS layout provided by TemplateMo, a great website to download free CSS templates.</p>
+                    <h2>Marque consultas com profissionais da saúde</h2>
+                    <p>Consulta com nutricionistas e educadores físicos.</p>
                   </div>
                   <div class="col-lg-12">
                     <div class="white-button first-button scroll-to-section">
@@ -136,9 +138,14 @@ https://templatemo.com/tm-570-chain-app-dev
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
-            <h4>Amazing <em>Services &amp; Features</em> for you</h4>
+            <h4>Sobre <em>nós</em></h4>
             <img src="{% static 'home/assets/images/heading-line-dec.png'%}" alt="">
-            <p>If you need the greatest collection of HTML templates for your business, please visit <a rel="nofollow" href="https://www.toocss.com/" target="_blank">TooCSS</a> Blog. If you need to have a contact form PHP script, go to <a href="https://templatemo.com/contact" target="_parent">our contact page</a> for more information.</p>
+            <p>Bem-vindo ao nosso site! Somos uma plataforma inovadora que conecta pessoas em busca de orientação nutricional e treinamento físico com profissionais qualificados, engajados em promover um estilo de vida saudável e equilibrado.</p>
+          </div>
+          <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+            <h4>Nossa <em>missão</em></h4>
+            <img src="{% static 'home/assets/images/heading-line-dec.png'%}" alt="">
+            <p>Nossa missão é inspirar e transformar vidas, proporcionando acesso fácil e seguro a nutricionistas e educadores físicos altamente capacitados. Acreditamos que uma alimentação balanceada e a prática regular de atividades físicas são fundamentais para alcançar o bem-estar e a plenitude em todas as áreas da vida.</p>
           </div>
         </div>
       </div>
@@ -148,8 +155,8 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-lg-3">
           <div class="service-item first-service">
             <div class="icon"></div>
-            <h4>App Maintenance</h4>
-            <p>You are not allowed to redistribute this template ZIP file on any other website.</p>
+            <h4>Atendimento Personalizado</h4>
+            <p>Entendemos que cada indivíduo é único, com necessidades específicas.</p>
             <div class="text-button">
               <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
@@ -158,8 +165,8 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-lg-3">
           <div class="service-item second-service">
             <div class="icon"></div>
-            <h4>Rocket Speed of App</h4>
-            <p>You are allowed to use the Chain App Dev HTML template. Feel free to modify or edit this layout.</p>
+            <h4>Fácilidade e comodidade</h4>
+            <p>Com apenas alguns cliques, você poderá encontrar um nutricionista ou educador físico adequado à sua demanda e agendar consultas online de forma rápida e segura.</p>
             <div class="text-button">
               <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
@@ -168,11 +175,8 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-lg-3">
           <div class="service-item third-service">
             <div class="icon"></div>
-            <h4>Multi Workflow Idea</h4>
-            <p>If this template is beneficial for your work, please support us <a rel="nofollow" href="https://paypal.me/templatemo" target="_blank">a little via PayPal</a>. Thank you.</p>
-            <div class="text-button">
-              <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
-            </div>
+            <h4>Integração de Conhecimentos</h4>
+            <p>Ao combinar a expertise de nutricionistas e educadores físicos, nossa plataforma oferece uma abordagem holística e integrada para o bem-estar.</p>
           </div>
         </div>
         <div class="col-lg-3">
@@ -189,83 +193,9 @@ https://templatemo.com/tm-570-chain-app-dev
     </div>
   </div>
 
-  <div id="about" class="about-us section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 align-self-center">
-          <div class="section-heading">
-            <h4>About <em>What We Do</em> &amp; Who We Are</h4>
-            <img src="{% static 'home/assets/images/heading-line-dec.png'%}" alt="">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor incididunt ut labore et dolore magna.</p>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Maintance Problems</a></h4>
-                <p>Lorem Ipsum Text</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">24/7 Support &amp; Help</a></h4>
-                <p>Lorem Ipsum Text</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Fixing Issues About</a></h4>
-                <p>Lorem Ipsum Text</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="#">Co. Development</a></h4>
-                <p>Lorem Ipsum Text</p>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eismod tempor idunte ut labore et dolore adipiscing  magna.</p>
-              <div class="gradient-button">
-                <a href="#">Start 14-Day Free Trial</a>
-              </div>
-              <span>*No Credit Card Required</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="right-image">
-            <img src="{% static 'home/assets/images/about-right-dec.png'%}" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <footer id="newsletter">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-          <div class="section-heading">
-            <h4>Join our mailing list to receive the news &amp; latest trends</h4>
-          </div>
-        </div>
-        <div class="col-lg-6 offset-lg-3">
-          <form id="search" action="#" method="GET">
-            <div class="row">
-              <div class="col-lg-6 col-sm-6">
-                <fieldset>
-                  <input type="address" name="address" class="email" placeholder="Email Address..." autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6 col-sm-6">
-                <fieldset>
-                  <button type="submit" class="main-button">Subscribe Now <i class="fa fa-angle-right"></i></button>
-                </fieldset>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
       <div class="row">
         <div class="col-lg-3">
           <div class="footer-widget">
@@ -309,15 +239,7 @@ https://templatemo.com/tm-570-chain-app-dev
             </ul>
           </div>
         </div>
-        <div class="col-lg-3">
-          <div class="footer-widget">
-            <h4>About Our Company</h4>
-            <div class="logo">
-              <img src="{% static 'home/assets/images/white-logo.png'%}" alt="">
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-          </div>
-        </div>
+        
         <div class="col-lg-12">
           <div class="copyright-text">
             <p>Copyright © 2022 Chain App Dev Company. All Rights Reserved. 
