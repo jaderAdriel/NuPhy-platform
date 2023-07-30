@@ -12,7 +12,7 @@
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item"><a href="/consulta/listarConsultasProfissional/">Consultas</a></li>
+        <li class="breadcrumb-item"><a href="/consulta/listarConsultas/">Consultas</a></li>
         <li class="breadcrumb-item"><a href="/consulta/detalhar/{% if treino %}{{ treino.consulta.id}}{%else%}{{ dieta.consulta.id}}{%endif%}/">Consulta</a></li>
         <li class="breadcrumb-item">
             Detalhar {% if treino %}treino {{ treino.get_diaSemana_display }}{%else%}dieta {{ dieta.get_diaSemana_display }}{%endif%}

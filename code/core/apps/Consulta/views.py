@@ -26,7 +26,7 @@ def criarConsulta(request):
         horario.preenchido = True
         horario.save()
     
-    return redirect("/consulta/listarConsultasCliente/")
+    return redirect("/consulta/listarConsultas/")
 
 
 @login_required
@@ -73,7 +73,7 @@ def detalharConsulta(request, consulta_id):
 
 
 @login_required
-def listarConsultasProfissional(request):
+def listarConsulta(request):
     id_usuario = request.user.id
     consultas = []
     usuario = Usuario.objects.get(id=id_usuario) 
@@ -89,11 +89,8 @@ def listarConsultasProfissional(request):
     }
 
     if request.method == 'GET':
-     # Definir os campos de filtro desejados
-        campos_filtro = ['horario__data', 'paciente__cpf']
-        
-        # Aplicar filtros
-        for campo in campos_filtro:
+     
+        for campo in request.GET:
             valor = request.GET.get(campo)
             context[campo] = ''
             if valor:

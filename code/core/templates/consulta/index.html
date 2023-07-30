@@ -21,16 +21,19 @@
 
 {% block content %}
 
-<form class="row g-3 mb-3" action="/consulta/" method="GET">
+<form class="row g-3 mb-3" action="/consulta/listarConsultas/" method="GET">
 
+  {% if tipo != 'C' %}
     <div class="col-md-4">
-        <input type="text" class="form-control" name="paciente__cpf" placeholder="Cpf do cliente" value="{{ paciente__cpf }}">
+      <input type="text" class="form-control" name="paciente__first_name" placeholder="Nome" value="{{ paciente__first_name }}">
     </div>
+    {% endif %}
     <div class="col-md-4">
-        <input type="date" class="form-control" name="horario__data" id="horario__data" placeholder="Data" value="{{ data }}">
+        <input type="date" class="form-control" name="horario__data" id="horario__data" placeholder="Data" value="{{ horario__data }}">
     </div>
     <div class="col-md-4">
         <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="fas fa-search"></i> Filtrar </button>
+        <a href="/consulta/listarConsultas/">Limpar</a>
     </div>
 </form>
 
@@ -47,7 +50,14 @@
           <img src="{% static 'assets/document-1-svgrepo-com.svg' %}" alt="" style="width: 40px; height: 45px"
             />
           <div class="ms-3">
-            <div class="fw-bold">{{ consulta.paciente.first_name }} {{ consulta.paciente.last_name }}</div>
+            {% if request.user.usuario.tipo == 'C'%}
+            <div class="fw-bold"> 
+              {{ consulta.horario.profissional.first_name }} {{ consulta.horario.profissional.last_name }} - 
+              <span class="text-muted"><a href="{% url 'detalhar_perfil' consulta.horario.profissional.id %}"> @{{ consulta.horario.profissional.username }} </a></span> </div>
+            {% else %}
+            <div class="fw-bold"> {{ consulta.paciente.first_name }} {{ consulta.paciente.last_name }}</div>
+            {% endif %}
+            <span class="text-muted">{% if consulta.horario.profissional.tipo == "N" %} Nutricionista {% else %} Educador físico {% endif %}</span>
             <div class="text-muted">{{consulta.horario.data}} ás {{consulta.horario.hora}}</div>
           </div>
         </div><!-- template.html -->

@@ -22,14 +22,14 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link collapsed" href="{% url 'listar_consultas_por_cliente' %}">
+                        <a class="nav-link collapsed" href="{% url 'listar_consultas' %}">
                           <i class="fas fa-clipboard-check"></i>
                           <span>Consultas</span>
                         </a>
                       </li>
                     {% elif group.name == 'Nutricionista' or group.name == 'Educador Fisico' %}
                       <li class="nav-item">
-                        <a class="nav-link collapsed" href="{% url 'listar_consultas_por_profissional' %}">
+                        <a class="nav-link collapsed" href="{% url 'listar_consultas' %}">
                           <i class="fas fa-clipboard-check"></i>
                           <span>Consultas</span>
                         </a>
