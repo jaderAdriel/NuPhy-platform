@@ -10,6 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="{% static '/style/registration/registrar.css' %}">
     
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -57,10 +58,12 @@ https://templatemo.com/tm-570-chain-app-dev
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="{% url 'home'%}" class="logo d-flex align-items-center">
-              <img src="{% static '/assets/logo.png' %}" alt="oi">
-              <span class="d-none d-lg-block">NuPhy</span>
-            </a>
+            <div class="logo">
+              <img src="{% static '/assets/logo.png' %}" alt="">
+              <span class="logoName">
+                  <span class="text-secondary">Nutri</span>Ativo
+              </span>
+            </div>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
