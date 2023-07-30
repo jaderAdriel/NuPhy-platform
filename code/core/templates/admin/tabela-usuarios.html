@@ -33,6 +33,9 @@
             <a class="btn btn-link text-dark px-3 mb-0" href="{% url 'autorizarUsuario' usuario.id %}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Aprovar</a>
           </div>
         </li>
+        {% empty %}
+        Nenhum usuario pendente
+
         {% endfor %}
       </ul>
     </div>

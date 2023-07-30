@@ -49,12 +49,16 @@ def profile(request):
 def editarPerfil(request):
     if request.method == 'POST':
         user = Usuario.objects.get(pk=request.user.id)
+        foto_perfil = request.FILES.get('foto')
         form =  editarUsuario(request.POST, instance=user )
 
+        if foto_perfil:
+            user.foto = foto_perfil
+            
         if form.is_valid():
             form.save()
 
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('/accounts/')
     
 
 @login_required

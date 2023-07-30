@@ -1,7 +1,10 @@
 {% extends 'Base.html' %}
 {% load bootstrap %}
+{% load static %}
 {% block head %}
+
 <title> Perfil </title>
+
 {% endblock %}
 
 
@@ -15,7 +18,7 @@
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-            <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg" alt="Profile" class="rounded-circle">
+            <img  src="{% if usuario.foto %} {{ usuario.foto.url }}   {% else %} {% static 'img/profile-placeholder.jpg' %} {% endif %}" alt="Profile" class="rounded-circle">
             <h2>{{ usuario.first_name }} {{ usuario.last_name }}</h2>
             <h3>{% if usuario.tipo == 'N' %} Nutricionista {% elif usuario.tipo == 'ED' %} Educador Físico {% endif %}</h3>
             <div class="social-links mt-2">
@@ -88,7 +91,7 @@
 
                 <h5 class="card-title">Editar informações</h5>
 
-                <form action="{% url 'editarPerfil' %}" method="POST">
+                <form action="{% url 'editarPerfil' %}" enctype="multipart/form-data" method="POST">
                   {% csrf_token %}
                   {{form|bootstrap}}
                   <button type="submit" class="btn btn-primary">Salvar alteraçoes</button>
