@@ -1,9 +1,11 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from accounts.models import Usuario
-from .forms import RegistroUsuarioForm, editarUsuario
+from .forms import RegistroUsuarioForm, editarAdminForm, editarClienteForm, editarProfissionalForm
 from .permissions import set_permissions
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
+from core.decorators import admin_required
+
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -36,9 +38,15 @@ def cadastrar(request):
 @login_required
 def profile(request):
     user = Usuario.objects.get(pk=request.user.id)
+    form = ''
+    if user.tipo == 'C' or user.tipo == 'A':
+        form = editarClienteForm(instance=user )
+    else:
+        form = editarProfissionalForm(instance=user )
+            
     context = {
         'usuario' : user,
-        'form' : editarUsuario(instance=user)
+        'form' : form
     }
     return render(request, 'registration/profile.html', context=context)
 
@@ -49,7 +57,12 @@ def editarPerfil(request):
     if request.method == 'POST':
         user = Usuario.objects.get(pk=request.user.id)
         foto_perfil = request.FILES.get('foto')
-        form =  editarUsuario(request.POST, instance=user )
+        form = ''
+
+        if user.tipo == 'C' or user.tipo == 'A':
+            form = editarClienteForm(request.POST, instance=user )
+        else:
+            form = editarProfissionalForm(request.POST, instance=user )
 
         if foto_perfil:
             user.foto = foto_perfil
@@ -61,7 +74,7 @@ def editarPerfil(request):
     
 
 @login_required
-@user_passes_test(lambda user: user.is_staff)
+@admin_required
 def listarUsuariosPendentes(request):
 
     context = {
@@ -72,7 +85,7 @@ def listarUsuariosPendentes(request):
 
 
 @login_required
-@user_passes_test(lambda user: user.is_staff)
+@admin_required
 def deletarUsuario(request, id):
     # Lógica para deletar o usuário
     Usuario.objects.get(pk=id).delete()
@@ -86,7 +99,7 @@ def deletarUsuario(request, id):
 
 
 @login_required
-@user_passes_test(lambda user: user.is_staff)
+@admin_required
 def autorizarUsuario(request, id):
     # Autorização do usuario
     usuario = Usuario.objects.get(pk=id)

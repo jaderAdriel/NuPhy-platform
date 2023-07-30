@@ -57,7 +57,9 @@
             {% else %}
             <div class="fw-bold"> {{ consulta.paciente.first_name }} {{ consulta.paciente.last_name }}</div>
             {% endif %}
+            {% if consulta.horario.profissional.tipo == "C" %}
             <span class="text-muted">{% if consulta.horario.profissional.tipo == "N" %} Nutricionista {% else %} Educador físico {% endif %}</span>
+            {% endif %}
             <div class="text-muted">{{consulta.horario.data}} ás {{consulta.horario.hora}}</div>
           </div>
         </div><!-- template.html -->

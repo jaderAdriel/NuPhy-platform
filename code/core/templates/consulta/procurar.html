@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <input type="text" class="form-control" name="cpf" placeholder="Cpf {% if 'Nutricionista' or 'Educador Fisico' in request.user.groups %} do cliente {%else%} do profissional {%endif%}" value="{{ cpf }}">
+        <input type="text" class="form-control" name="cpf" placeholder="Cpf" value="{{ cpf }}">
     </div>
     <div class="col-md-6">
         <input type="text" class="form-control" name="localAtendimento" id="localAtendimento" placeholder="local de atendimento" value="{{ localAtendimento }}">
@@ -43,6 +43,7 @@
     </div>
     <div class="col-md-4">
         <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal"><i class="fas fa-search"></i> Procurar</button>
+        <a href="/consulta/procurar_profissional/" class="">limpar filtros</a>
     </div>
 </form>
 

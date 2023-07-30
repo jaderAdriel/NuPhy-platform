@@ -20,7 +20,7 @@
       border-radius: var(--radius-s);
       max-width: 40rem;
       justify-content: start;
-      background-image: url("../../assets/petting.svg");
+      background-image: url("../../assets/logo.png");
       background-position: center right 10%;
       background-repeat: no-repeat;
       background-size: 12rem; } }

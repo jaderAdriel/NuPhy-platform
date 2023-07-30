@@ -8,7 +8,7 @@ from accounts.models import Usuario
 class Prontuario( models.Model ):
     consulta =  OneToOneField(Consulta, on_delete=models.CASCADE, related_name='prontuario')
     observacoes = models.CharField(
-        max_length=255,
+        max_length=2500,
         blank=False,
         null=False
     )

@@ -1,10 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 def home(request):
-    user = request.user
+    if not request.user.is_authenticated: 
+        return render(request, 'home.html')
 
-    context = {
-        'user': user,
-        # Outras variáveis de contexto que você desejar incluir
-    }
-    return render(request, 'home.html', context)
+    tipo = request.user.usuario.tipo
+    if tipo == 'C':
+        return redirect('/consulta/listarConsultas/')
+    elif tipo == 'A':
+        return redirect('/accounts/listar')
+    else:
+        return redirect('/horario/')
+
+

@@ -50,14 +50,22 @@
                 {% if consulta.horario.profissional.localAtendimento  %}
                 <div class="row mb-3">
                   <div class="col-lg-3 col-md-4 fw-bold">Local de Atendimento</div>
-                  <div class="col-lg-9 col-md-8">{{ profissional.localAtendimento }}</div>
+                  <div class="col-lg-9 col-md-8">{{ consulta.horario.profissional.localAtendimento }}</div>
                 </div>
                 {% endif %}
+                
             
                 <div class="row mb-3">
                   <div class="col-lg-3 col-md-4 fw-bold">Horário</div>
                   <div class="col-lg-9 col-md-8">{{ consulta.horario.data }} {{ consulta.horario.hora }}</div>
                 </div>
+
+                {% if  consulta.prontuario %}
+                <button type="button" class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#verprontuario">
+                  <i class="fas fa-docs" aria-hidden="true"></i>Ver prontuario
+                </button>
+                {% endif %}
+
                 <div class="modal fade" id="verprontuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -69,8 +77,8 @@
                         <div>
                           
                           <div class="prontuario-details">
-                            <div class="form-group">
-                              <label for="id_observacoes">Observações:</label>
+                            <div >
+                              
                               <p>{{ consulta.prontuario.observacoes }}</p>
                             </div>
                             <!-- Adicione mais campos aqui conforme necessário -->
@@ -137,7 +145,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 text-center py-4">
-        <span class="text-gray-600">Nenhum resultado para sua consulta</span>
+        <span class="text-gray-600">Nenhum plano foi passado ainda</span>
       </div>
     </div>
   </div>

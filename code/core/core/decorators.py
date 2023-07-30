@@ -13,6 +13,15 @@ def educador_required(function=None):
         return actual_decorator(function)
     return actual_decorator
 
+def admin_required(function=None):
+    actual_decorator = user_passes_test(
+        lambda u: u.groups.filter(name='Administrador').exists(),
+        login_url='/accounts/login/'
+    )
+    if function:
+        return actual_decorator(function)
+    return actual_decorator
+
 def nutri_required(function=None):
     actual_decorator = user_passes_test(
         lambda u: u.groups.filter(name='Nutricionista').exists(),

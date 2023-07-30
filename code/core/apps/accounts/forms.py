@@ -16,9 +16,19 @@ class RegistroUsuarioForm(UserCreationForm):
             self.add_error('codigoAutenticador', 'Campo obrigatório para o tipo selecionado')
 
 
-class editarUsuario(forms.ModelForm):  # Certifique-se de importar "forms" corretamente
+class editarProfissionalForm(forms.ModelForm):  # Certifique-se de importar "forms" corretamente
     class Meta:
         model = Usuario
         fields = ["first_name", "last_name", "email", "localAtendimento", "foto"]
+
+class editarAdminForm(forms.ModelForm):  # Certifique-se de importar "forms" corretamente
+    class Meta:
+        model = Usuario
+        fields = ["first_name", "last_name", "email", "foto"]
+
+class editarClienteForm(forms.ModelForm):  # Certifique-se de importar "forms" corretamente
+    class Meta:
+        model = Usuario
+        fields = ["first_name", "last_name", "email", "foto"]
 
     # Adicione validações personalizadas aqui, se necessário

@@ -18,12 +18,12 @@
     .card-wrapper {
       box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
       border-radius: var(--radius-s);
-      max-width: 40rem;
+      max-width: 60rem;
       justify-content: start;
-      background-image: url("../../assets/petting.svg");
+      background-image: url("../../home/assets/images/fitness.png");
       background-position: center right 10%;
       background-repeat: no-repeat;
-      background-size: 12rem; } }
+      background-size: 50%; } }
 
 .card {
   width: 100%;
@@ -31,7 +31,7 @@
   height: fit-content; }
   @media only screen and (min-width: 460px) {
     .card {
-      max-width: 25rem; } }
+      max-width: 60%; } }
   .card__header {
     display: flex;
     flex-direction: column;
@@ -73,14 +73,14 @@
       flex-grow: 1;
       min-width: 5rem; }
   .form .field {
-    --input-fontSize: 0.9rem;
-    --label-fontSize: 0.666rem;
+    --input-fontSize: 1rem;
+    --label-fontSize: 0.9rem;
     --border-focus-size: 2px;
-    --field-height: 2rem;
+    --field-height: 2.5rem;
     position: relative;
     height: var(--field-height);
     width: 100%;
-    max-width: 25rem; }
+    max-width: 35rem; }
     .form .field label {
       display: inline;
       position: absolute;
@@ -97,6 +97,8 @@
       color: var(--text-muted); }
     .form .field input {
       position: absolute;
+    background-color: #ffffffe0;
+
       top: 0;
       left: 0;
       width: 100%;
