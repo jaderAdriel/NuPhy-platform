@@ -18,8 +18,6 @@ def criarTreino(request):
     
     return redirect(request.META.get('HTTP_REFERER'))
 
-##################
-
 def editarTreino(request, treino_id):
     treino = Treino.objects.get(pk=treino_id)
     
@@ -45,9 +43,6 @@ def deletarTreino(request, treino_id):
     Treino.objects.get(pk=treino_id).delete()
     
     return redirect(request.META.get('HTTP_REFERER'))
-
-
-#################
 
 def detalharTreino(request, treino_id):
     treino = Treino.objects.get(pk=treino_id)

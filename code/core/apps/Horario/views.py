@@ -41,12 +41,9 @@ def criarHorario(request):
             messages.success(request, 'Horario adicionado na agenda com sucesso.')
         else:
             messages.error(request, "Não foi possivel criar o horario")
-
-        # Redireciona para a página anterior
         return redirect(request.META.get('HTTP_REFERER'))
 
     return render(request, "horario/index.html", context)
-
 
 @login_required
 @profissional_required
@@ -57,7 +54,6 @@ def deletarHorario(request, obj_id):
     messages.success(request, 'Horario deletado da agenda com sucesso.')
 
     return redirect(request.META.get('HTTP_REFERER'))
-
 
 def verPerfilProfissional(request, id):
     profissional = Usuario.objects.get(pk=id)

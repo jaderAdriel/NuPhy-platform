@@ -50,8 +50,6 @@ def profile(request):
     }
     return render(request, 'registration/profile.html', context=context)
 
-
-
 @login_required
 def editarPerfil(request):
     if request.method == 'POST':
@@ -71,7 +69,6 @@ def editarPerfil(request):
             form.save()
 
     return redirect('/accounts/')
-    
 
 @login_required
 @admin_required
@@ -83,32 +80,19 @@ def listarUsuariosPendentes(request):
 
     return render(request, 'admin/autorizar-usuarios.html', context=context)
 
-
 @login_required
 @admin_required
 def deletarUsuario(request, id):
-    # Lógica para deletar o usuário
     Usuario.objects.get(pk=id).delete()
-
-    # Armazena uma mensagem de redirecionamento
     messages.success(request, 'Usuário deletado com sucesso.')
-
-    # Redireciona para a página anterior
     return redirect(request.META.get('HTTP_REFERER'))
-
-
 
 @login_required
 @admin_required
 def autorizarUsuario(request, id):
-    # Autorização do usuario
     usuario = Usuario.objects.get(pk=id)
     usuario.is_active = True
     usuario.save()
 
-
-    # Armazena uma mensagem de redirecionamento
     messages.success(request, 'Usuário autorizado com sucesso.')
-
-    # Redireciona para a página anterior
     return redirect(request.META.get('HTTP_REFERER'))

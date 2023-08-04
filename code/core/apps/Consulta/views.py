@@ -28,7 +28,6 @@ def criarConsulta(request):
     
     return redirect("/consulta/listarConsultas/")
 
-
 @login_required
 @profissional_required
 def deletarConsulta(request, consulta_id):
@@ -37,8 +36,6 @@ def deletarConsulta(request, consulta_id):
     
     return HttpResponseRedirect("/")
 
-
-    
 @login_required
 @profissional_required
 def gerenciarConsulta(request, consulta_id):
@@ -59,7 +56,6 @@ def gerenciarConsulta(request, consulta_id):
 
     return render(request, 'consulta/profissionalGerenciarConsulta.html', context)
 
-
 @login_required
 def detalharConsulta(request, consulta_id):
     consulta = Consulta.objects.get(pk=consulta_id)
@@ -70,7 +66,6 @@ def detalharConsulta(request, consulta_id):
     }
     
     return render(request, 'consulta/ClienteVizualizaConsulta.html', context)
-
 
 @login_required
 def listarConsulta(request):
@@ -102,8 +97,6 @@ def listarConsulta(request):
 
     return render(request, 'consulta/index.html', context)
 
-
-
 def pesquisar(request):
    
     profissionais = Usuario.objects.exclude(id=request.user.id).filter(tipo__in=['N', 'EF'])
@@ -114,10 +107,7 @@ def pesquisar(request):
     }
 
     if request.method == 'GET':
-     # Definir os campos de filtro desejados
         campos_filtro = ['tipo', 'cpf', 'codigoAutenticador', 'localAtendimento']
-        
-        # Aplicar filtros
         for campo in campos_filtro:
             valor = request.GET.get(campo)
             context[campo] = ''
